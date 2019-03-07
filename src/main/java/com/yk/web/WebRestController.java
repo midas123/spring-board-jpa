@@ -2,6 +2,9 @@ package com.yk.web;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yk.web.member.MemberJoinRequestDto;
+import com.yk.web.member.MembersService;
+
 import lombok.AllArgsConstructor;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,18 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 @AllArgsConstructor
-public class HomeController {
+public class WebRestController {
 	
-	private MembersRepository memberRepository;
+	private MembersService membersService;
 
-    @RequestMapping("/")
-    public String index() {
-        return "Greetings from Spring Boot!";
-    }
-    
     @PostMapping("/join")
     public void joinMember(@RequestBody MemberJoinRequestDto dto) {
-    	memberRepository.save(dto.toEntity());
+    	System.out.println("join");
+    	System.out.println(dto);
+    	membersService.join(dto);
     }
 
 }

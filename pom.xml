@@ -8,11 +8,11 @@
 		<version>2.1.3.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>spring-board-jpa</artifactId>
+	<groupId>com.yk</groupId>
+	<artifactId>my-web-board</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-board-jpa</name>
-	<description>Springboot jba board ex</description>
+	<name>my-web-board</name>
+	<description>this-is-my-web-board</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -48,24 +48,18 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-		<!-- <dependency>
-		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-core</artifactId>
-		    <version>5.2.11.Final</version>
-		</dependency> -->	
-		<!-- https://mvnrepository.com/artifact/pl.allegro.tech.boot/handlebars-spring-boot-starter -->
 		<dependency>
-		    <groupId>pl.allegro.tech.boot</groupId>
-		    <artifactId>handlebars-spring-boot-starter</artifactId>
-		    <version>0.3.1</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+    		<scope>runtime</scope>
 		</dependency>
+		<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    	</dependency>
 		
-		
-			
 	</dependencies>
-	
-
 	<build>
 		<plugins>
 			<plugin>

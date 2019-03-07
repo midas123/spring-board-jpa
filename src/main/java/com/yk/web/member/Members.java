@@ -1,10 +1,12 @@
-package com.yk.web;
+package com.yk.web.member;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.yk.web.BaseTimeEntity;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -25,8 +27,7 @@ public class Members extends BaseTimeEntity{
     @Column(length = 50, nullable = false)
     private String nickname;
 
-    //@Column(length = 50, nullable = false)
-    @Column(length = 50)
+    @Column(length = 50, nullable = false)
     private String password;
 
     @Builder

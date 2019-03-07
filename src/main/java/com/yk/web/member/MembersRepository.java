@@ -1,4 +1,4 @@
-package com.yk.web;
+package com.yk.web.member;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
