@@ -12,8 +12,12 @@ public class MembersService {
 	private MembersRepository membersRepository;
 	
 	@Transactional
-    public Long join(MemberJoinRequestDto dto){
+    public Long join(MemberRequestDto dto){
 	      return membersRepository.save(dto.toEntity()).getNum();
+	}
+	
+	public Members login(MemberRequestDto dto) {
+		return membersRepository.findByEmailAndPassword(dto.getEmail(), dto.getPassword());
 	}
 	
 }

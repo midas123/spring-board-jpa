@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Insert title here</title>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
+<!-- <link rel="stylesheet" type="text/css" href="css/main.css"> -->
+<style>
+.member-form{
+	padding:50px;
+	width:600px; 
+	margin: 0 auto;
+	-webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+}
+.member-form-item{
+	height:80px;
+}
+.member-form-item input{
+	width:70%;
+	float:right;
+}
+.member-form-item label{
+	width:30%;
+}
+.member-form .member-footer{
+	text-align: center;
+	padding:30px;
+}
+.member-form .member-footer button{
+}
+
+.member-header h5{
+	text-align: center;
+	padding-bottom: 50px;
+}
+.error-message {
+	color:red;
+	font-size: 13px;
+	position: relative;
+	left: 30%;
+	width:100%;
+}
+
+</style>
+
+</head>
+<body>
+<form>
+<div class="member-form">
+	<div class="member-header">
+	    <h5 class="modal-title" id="savePostsLabel">회원 가입</h5>
+	</div>
+	<div class="member-form-item">
+	    <label for="title">이메일</label>
+	  <input type="text" class="form-control" id="email" placeholder="ex)email@example.com"/>
+	</div>
+	<div class="member-form-item">
+	    <label for="author">닉네임</label>
+	    <input type="text" class="form-control" id="nickname"/>
+	</div>
+	<div class="member-form-item">
+	    <label for="phone-number">휴대폰 번호</label>
+	    <input type="text" class="form-control" id="phoneNumber"/>
+	</div>
+	<div class="member-form-item">
+    <label for="password">비밀번호</label>
+         <input type="password" id="password" class="form-control"/>
+    </div>
+    <div class="member-form-item">
+        <label for="password">비밀번호 확인</label>
+        <input type="password" class="form-control" id="password2"/>
+    </div>
+	<div class="member-footer">
+	    <button type="button" class="btn btn-primary" id="btn-save">가입</button>
+	    <button type="button" class="btn btn-secondary" onclick="javascript:location.href='/';">취소</button>
+	</div>
+</div>
+</form>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

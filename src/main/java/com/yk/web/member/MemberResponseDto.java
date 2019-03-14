@@ -1,24 +1,24 @@
 package com.yk.web.member;
 
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
-public class MemberJoinRequestDto {
+public class MemberResponseDto {
 	private int num;
+	
 	private String email;
+	
 	private String nickname;
+	
 	private String password;
 	
+	private String phoneNumber;
+	
 	@Builder
-	public MemberJoinRequestDto(String email, String nickname, String password) {
+	public MemberResponseDto(String email, String nickname, String password, String phoneNumber) {
 		this.email = email;
 		this.nickname = nickname;
 		this.password = password;
+		this.phoneNumber = phoneNumber;
 	}
 	
 	public Members toEntity() {
@@ -26,8 +26,8 @@ public class MemberJoinRequestDto {
 				.email(email)
 				.nickname(nickname)
 				.password(password)
+				.phoneNumber(phoneNumber)
 				.build();
 	}
-	
 	
 }

@@ -29,7 +29,7 @@ public class MembersServiceTest {
 	@Test
 	public void testServiceJoin() {
 		//given
-		MemberJoinRequestDto dto = MemberJoinRequestDto.builder()
+		MemberRequestDto dto = MemberRequestDto.builder()
 				.email("email@naver.com").nickname("nick").password("1234").build();
 
 		//when

@@ -1,74 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:th="http://www.thymeleaf.org">
 <head>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link rel="stylesheet" type="text/css" href="css/main.css">
-<!------ Include the above in your HEAD tag ---------->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
+<link rel="stylesheet" type="text/css" href="css/main.css"></link>
 </head>
 <body>
 <div class="wrapper fadeInDown">
   <div id="formContent">
-    <!-- Tabs Titles -->
-
-    <!-- Icon -->
     <div class="fadeIn first">
       게시판
       <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> --> 
     </div>
 
-    <!-- Login Form -->
-    <form class="login-form">
-      <input type="text" id="login_email" class="fadeIn second" name="login" placeholder="이메일(example@co.kr)">
-      <input type="text" id="login_password" class="fadeIn third" name="login" placeholder="비밀번호">
-      <input type="submit" class="fadeIn fourth" value="로그인">
+    <form>
+     <div class="form-group-login">
+      <input type="text" id="login_email" class="fadeIn second" placeholder="이메일(example@co.kr)" value=""/>
+     </div>
+     <div class="form-group-login">
+      <input type="password" id="login_password" class="fadeIn third" placeholder="비밀번호"/>
+      </div>
     </form>
 
-    <!-- Remind Passowrd -->
+      <input type="button" class="fadeIn fourth" id="btn-login" value="로그인"/>
     <div id="formFooter">
-      <a class="underlineHover" href="#" data-toggle="modal" data-target="#savePostsModal">회원가입</a> 또는
+      <a class="underlineHover" href="/join">회원가입</a>
+      또는
       <a class="underlineHover" href="#">비밀번호 찾기</a>
     </div>
   </div>
-
   </div>
-
-   <div class="modal fade" id="savePostsModal" tabindex="-1" role="dialog" aria-labelledby="savePostsLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="savePostsLabel">회원 가입</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="member-form-group">
-                        <div class="member-form-item">
-                            <label for="title">이메일</label>
-                            <input type="text" class="form-control" id="email" placeholder="이메일을 입력하세요">
-                            
-                        </div>
-                        <div class="member-form-item">
-                            <label for="author">닉네임</label>
-                            <input type="text" class="form-control" id="nickname" placeholder="닉네임을 입력하세요">
-                        </div>
-                        <div class="member-form-item">
-                            <label for="password">비밀번호</label>
-                            <input type="password" id="password" placeholder="비밀번호를 입력하세요">
-                        </div>
-                        <div class="member-form-item">
-                            <label for="password">비밀번호 확인</label>
-                            <input type="password" id="password2" placeholder="비밀번호를 입력하세요">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                    <button type="button" class="btn btn-primary" id="btn-save">가입</button>
-                </div>
-            </div>
-        </div>
-    </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
