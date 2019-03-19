@@ -13,7 +13,7 @@ public class MembersService {
 	
 	@Transactional
     public Long join(MemberRequestDto dto){
-	      return membersRepository.save(dto.toEntity()).getNum();
+		return membersRepository.save(dto.toEntity()).getNum();
 	}
 	
 	public Members login(MemberRequestDto dto) {

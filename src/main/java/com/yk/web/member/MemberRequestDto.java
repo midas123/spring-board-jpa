@@ -10,9 +10,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @NoArgsConstructor
+
+@PasswordMatch.List({ 
+	@PasswordMatch(field = "password", fieldMatch = "comfirmPassword", message = "비밀번호가 서로 다릅니다."), 
+})
 public class MemberRequestDto {
 	private int num;
 	

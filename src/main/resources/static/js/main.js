@@ -2,22 +2,21 @@ var main = {
     init : function () {
         var _this = this;
         console.log("this:"+_this);
-        $('#btn-save').on('click', function (event) {
+        $('#btn-save').on('click', function () {
         	console.log('joinClick');
             _this.join();
         });
         
-        $('#btn-login').on('click', function(event) {
+        $('#btn-login').on('click', function() {
         	_this.login();
         });
         
-        $('.form-control').on('click', function(event){
+        $('.form-control').on('click', function(){
         	var _this2 = $(this).attr('id');
         	if($('#'+_this2+'-error').length>0){
         		$('#'+_this2+'-error').remove();
         	}
         });
-        
     },
     join : function () {
         var data1 = {
@@ -66,6 +65,7 @@ var main = {
 
 var markingErrorField = function (response) {
     const errorFields = response.responseJSON.errors;
+    console.log(errorFields);
     if(!errorFields){
         alert(response.response.message);
         return;
@@ -80,6 +80,13 @@ var markingErrorField = function (response) {
         	$('#'+error['field']+'-error').remove();
             $field.after('<span class="error-message" id="'+error['field']+'-error">'+error.defaultMessage+'</span>');
         }
+        
+        if(error['code'] == "PasswordMatch"){
+        	$('#password2-error').remove();
+        	$('#password2').after('<span class="error-message" id="password2-error">'+error.defaultMessage+'</span>');
+        	console.log("check:"+error['code']);
+        }
+       
     }
     return false;
 };
