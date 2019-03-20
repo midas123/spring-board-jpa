@@ -3,8 +3,6 @@ package com.yk.web.member;
 import lombok.Builder;
 
 public class MemberResponseDto {
-	private int num;
-	
 	private String email;
 	
 	private String nickname;

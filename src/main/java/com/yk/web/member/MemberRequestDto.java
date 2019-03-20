@@ -1,9 +1,11 @@
 package com.yk.web.member;
 
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+
+import com.yk.web.valid.EmailValid;
+import com.yk.web.valid.PasswordMatch;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +24,8 @@ public class MemberRequestDto {
 	private int num;
 	
 	@NotBlank(message="이메일을 작성해주세요.")
-	@Email(message = "이메일 양식을 지켜주세요.")
+	//@Email(message = "이메일 양식을 지켜주세요.")
+	@EmailValid
 	private String email;
 	
 	@NotBlank(message="닉네임을 작성해주세요.")

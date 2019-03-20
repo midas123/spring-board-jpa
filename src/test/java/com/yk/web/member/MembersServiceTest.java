@@ -33,7 +33,7 @@ public class MembersServiceTest {
 				.email("email@naver.com").nickname("nick").password("1234").build();
 
 		//when
-		membersService.join(dto);
+		membersService.createUserAccount(dto);
 		
 		//then
 		Members member = membersRepository.findAll().get(0);
