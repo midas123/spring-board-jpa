@@ -17,12 +17,14 @@ public class WebRestController {
 	
     @PostMapping("/join")
     public Long joinMember(@Valid @RequestBody MemberRequestDto MemberDto) {
-    	return membersService.join(MemberDto);
+    	return membersService.createUserAccount(MemberDto);
     }
     
     @PostMapping("/login")
-    public String loginMember(@Valid @RequestBody MemberRequestDto MemberDto) {
-    	return membersService.login(MemberDto).getNickname();
+    public String loginMember(@RequestBody MemberRequestDto MemberDto) {
+    	System.out.println(MemberDto.getEmail());
+    	System.out.println(MemberDto.getPassword());
+    	return membersService.userLogin(MemberDto).getNickname();
     }
     
 }

@@ -35,7 +35,7 @@ var main = {
             data: JSON.stringify(data1)
         }).done(function() {
             alert('회원 가입 되었습니다.');
-            location.reload();
+            location.href="/";
         }).fail(function (response) {
         	markingErrorField(response);
         });
@@ -57,7 +57,8 @@ var main = {
         }).done(function() {
             location.href="/board";
         }).fail(function (response) {
-        	markingErrorField(response);
+        	console.log(response);
+        	alert('로그인 하실 수 없습니다.');
         });
     }
 };

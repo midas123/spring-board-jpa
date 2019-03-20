@@ -1,4 +1,4 @@
-package com.yk.web.member;
+package com.yk.web.valid;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

@@ -1,4 +1,4 @@
-package com.yk.web.member;
+package com.yk.web.valid;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

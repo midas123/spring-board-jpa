@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+.member-form{
+	padding:50px;
+	width:600px; 
+	margin: 0 auto;
+	-webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+}
+.member-form-item{
+	height:80px;
+}
+.member-form-item input{
+	width:70%;
+	float:right;
+}
+.member-form-item label{
+	width:30%;
+}
+.member-form .member-footer{
+	text-align: center;
+	padding:30px;
+}
+.member-form .member-footer button{
+}
+
+.member-header h5{
+	text-align: center;
+	padding-bottom: 50px;
+}
+.error-message {
+	color:red;
+	font-size: 13px;
+	position: relative;
+	left: 30%;
+	width:100%;
+}
