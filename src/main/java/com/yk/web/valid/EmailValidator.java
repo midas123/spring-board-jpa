@@ -16,13 +16,13 @@ public class EmailValidator implements ConstraintValidator<EmailValid, String> {
    public void initialize(EmailValid constraintAnnotation) {       
    }
    @Override
-   public boolean isValid(String email, ConstraintValidatorContext context){  
-       return (validateEmail(email));
+   public boolean isValid(String username, ConstraintValidatorContext context){  
+       return (validateEmail(username));
    } 
    
-   private boolean validateEmail(String email) {
+   private boolean validateEmail(String username) {
        pattern = Pattern.compile(EMAIL_PATTERN);
-       matcher = pattern.matcher(email);
+       matcher = pattern.matcher(username);
        return matcher.matches();
    }
 }

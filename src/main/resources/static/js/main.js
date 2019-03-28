@@ -1,9 +1,7 @@
 var main = {
     init : function () {
         var _this = this;
-        console.log("this:"+_this);
         $('#btn-save').on('click', function () {
-        	console.log('joinClick');
             _this.join();
         });
         
@@ -20,13 +18,12 @@ var main = {
     },
     join : function () {
         var data1 = {
-            email: $('#email').val(),
+            username: $('#email').val(),
             nickname: $('#nickname').val(),
             phoneNumber: $('#phoneNumber').val(),
             password: $('#password').val(),
             comfirmPassword: $('#password2').val()
         };
-        console.log("phone:"+$('#phoneNumber').val());
         $.ajax({
             type: 'POST',
             url: '/join',
@@ -42,9 +39,8 @@ var main = {
     },
     
     login : function () {
-    	console.log("login");
         var data2 = {
-            email: $('#email').val(),
+            username: $('#email').val(),
             password: $('#password').val()
         };
         console.log(data2);
@@ -58,7 +54,7 @@ var main = {
             location.href="/board";
         }).fail(function (response) {
         	console.log(response);
-        	alert('로그인 하실 수 없습니다.');
+        	alert('계정 또는 비밀번호가 다릅니다.');
         });
     }
 };
@@ -66,7 +62,6 @@ var main = {
 
 var markingErrorField = function (response) {
     const errorFields = response.responseJSON.errors;
-    console.log(errorFields);
     if(!errorFields){
         alert(response.response.message);
         return;
@@ -85,7 +80,6 @@ var markingErrorField = function (response) {
         if(error['code'] == "PasswordMatch"){
         	$('#password2-error').remove();
         	$('#password2').after('<span class="error-message" id="password2-error">'+error.defaultMessage+'</span>');
-        	console.log("check:"+error['code']);
         }
        
     }

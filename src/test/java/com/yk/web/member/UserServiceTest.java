@@ -10,16 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.yk.web.user.UserRequestDto;
+import com.yk.web.user.Users;
+import com.yk.web.user.UserRepository;
+import com.yk.web.user.UserService;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MembersServiceTest {
+public class UserServiceTest {
 
 	@Autowired
-	private MembersService membersService;
+	private UserService membersService;
 
 	@Autowired
-	private MembersRepository membersRepository;
+	private UserRepository membersRepository;
 	
 	@After
 	public void cleanUp() {
@@ -29,15 +34,15 @@ public class MembersServiceTest {
 	@Test
 	public void testServiceJoin() {
 		//given
-		MemberRequestDto dto = MemberRequestDto.builder()
+		UserRequestDto dto = UserRequestDto.builder()
 				.email("email@naver.com").nickname("nick").password("1234").build();
 
 		//when
 		membersService.createUserAccount(dto);
 		
 		//then
-		Members member = membersRepository.findAll().get(0);
-		assertThat(member.getEmail()).isEqualTo(dto.getEmail());
+		Users member = membersRepository.findAll().get(0);
+		assertThat(member.getUsername()).isEqualTo(dto.getUsername());
 		assertThat(member.getNickname()).isEqualTo(dto.getNickname());
 		assertThat(member.getPassword()).isEqualTo(dto.getPassword());
 		

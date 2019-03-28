@@ -1,4 +1,4 @@
-package com.yk.web.member;
+package com.yk.web.user;
 
 
 import javax.validation.constraints.NotBlank;
@@ -20,13 +20,13 @@ import lombok.Setter;
 @PasswordMatch.List({ 
 	@PasswordMatch(field = "password", fieldMatch = "comfirmPassword", message = "비밀번호가 서로 다릅니다."), 
 })
-public class MemberRequestDto {
-	private int num;
+public class UserRequestDto {
+	private int userid;
 	
 	@NotBlank(message="이메일을 작성해주세요.")
 	//@Email(message = "이메일 양식을 지켜주세요.")
 	@EmailValid
-	private String email;
+	private String username;
 	
 	@NotBlank(message="닉네임을 작성해주세요.")
 	private String nickname;
@@ -42,16 +42,16 @@ public class MemberRequestDto {
 	private String phoneNumber;
 	
 	@Builder
-	public MemberRequestDto(String email, String nickname, String password, String phoneNumber) {
-		this.email = email;
+	public UserRequestDto(String email, String nickname, String password, String phoneNumber) {
+		this.username = email;
 		this.nickname = nickname;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
 	}
 	
-	public Members toEntity() {
-		return Members.builder()
-				.email(email)
+	public Users toEntity() {
+		return Users.builder()
+				.username(username)
 				.nickname(nickname)
 				.password(password)
 				.phoneNumber(phoneNumber)
