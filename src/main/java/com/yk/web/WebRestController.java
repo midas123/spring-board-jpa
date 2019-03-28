@@ -2,8 +2,9 @@ package com.yk.web;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yk.web.member.MemberRequestDto;
-import com.yk.web.member.MembersService;
+import com.yk.web.user.UserRequestDto;
+import com.yk.web.user.UserService;
+
 import lombok.AllArgsConstructor;
 import javax.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,18 +14,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 @AllArgsConstructor
 public class WebRestController {
 	
-	private MembersService membersService;
+	private UserService membersService;
 	
     @PostMapping("/join")
-    public Long joinMember(@Valid @RequestBody MemberRequestDto MemberDto) {
+    public Long joinMember(@Valid @RequestBody UserRequestDto MemberDto) {
     	return membersService.createUserAccount(MemberDto);
     }
     
+ /*   
+   	//스프링 시큐리티 적용으로 주석처리
     @PostMapping("/login")
     public String loginMember(@RequestBody MemberRequestDto MemberDto) {
-    	System.out.println(MemberDto.getEmail());
-    	System.out.println(MemberDto.getPassword());
     	return membersService.userLogin(MemberDto).getNickname();
-    }
+    }*/
     
 }

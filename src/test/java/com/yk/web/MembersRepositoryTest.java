@@ -13,15 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.yk.web.member.Members;
-import com.yk.web.member.MembersRepository;
+import com.yk.web.user.Users;
+import com.yk.web.user.UserRepository;
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MembersRepositoryTest {
   	@Autowired
-    MembersRepository membersRepository;
+    UserRepository membersRepository;
 
     @After
     public void cleanup() {
@@ -33,16 +33,16 @@ public class MembersRepositoryTest {
 	public void joinMembership() {
 		//given
 		LocalDateTime now = LocalDateTime.now();
-		membersRepository.save(Members.builder()
-				.email("email@naver.com")
+		membersRepository.save(Users.builder()
+				.username("email@naver.com")
 				.nickname("닉네임")
 				.password("password").build());
 		
 		//when
-		List<Members> memberList = membersRepository.findAll();
+		List<Users> memberList = membersRepository.findAll();
 		
 		//then
-		Members member = memberList.get(0);
+		Users member = memberList.get(0);
 		assertThat(member.getNickname(), is("닉네임"));
 		assertThat(member.getPassword(), is("password"));
 		

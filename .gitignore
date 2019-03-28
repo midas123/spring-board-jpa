@@ -24,3 +24,11 @@ HELP.md
 /nbdist/
 /.nb-gradle/
 /build/
+
+
+###Properties###
+DBconnection.properties
+
+
+###YAML###
+application.yml

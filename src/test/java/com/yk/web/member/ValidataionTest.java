@@ -6,6 +6,8 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import com.yk.web.user.UserRequestDto;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -22,15 +24,15 @@ public class ValidataionTest {
         Validator validator = factory.getValidator();
         
 
-        MemberRequestDto user = new MemberRequestDto("abcgmail.com", "nick", "1234", "010111222222");
+        UserRequestDto user = new UserRequestDto("abcgmail.com", "nick", "1234", "010111222222");
  
         //Validate bean
-        Set<ConstraintViolation<MemberRequestDto>> constraintViolations = validator.validate(user);
+        Set<ConstraintViolation<UserRequestDto>> constraintViolations = validator.validate(user);
         
 
         //Show errors
         if (constraintViolations.size() > 0) {
-            for (ConstraintViolation<MemberRequestDto> violation : constraintViolations) {
+            for (ConstraintViolation<UserRequestDto> violation : constraintViolations) {
                 System.out.println(violation.getMessage());
             }
         } else {
