@@ -4,7 +4,9 @@ package com.yk.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import com.yk.web.member.MemberRequestDto;
+
+import com.yk.web.user.UserRequestDto;
+
 import lombok.AllArgsConstructor;
 
 @Controller

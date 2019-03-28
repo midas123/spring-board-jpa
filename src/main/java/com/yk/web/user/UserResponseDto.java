@@ -1,9 +1,9 @@
-package com.yk.web.member;
+package com.yk.web.user;
 
 import lombok.Builder;
 
-public class MemberResponseDto {
-	private String email;
+public class UserResponseDto {
+	private String username;
 	
 	private String nickname;
 	
@@ -12,16 +12,16 @@ public class MemberResponseDto {
 	private String phoneNumber;
 	
 	@Builder
-	public MemberResponseDto(String email, String nickname, String password, String phoneNumber) {
-		this.email = email;
+	public UserResponseDto(String email, String nickname, String password, String phoneNumber) {
+		this.username = email;
 		this.nickname = nickname;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
 	}
 	
-	public Members toEntity() {
-		return Members.builder()
-				.email(email)
+	public Users toEntity() {
+		return Users.builder()
+				.username(username)
 				.nickname(nickname)
 				.password(password)
 				.phoneNumber(phoneNumber)
