@@ -2,8 +2,12 @@ package com.yk.web.user;
 
 
 import javax.persistence.*;
-import lombok.Builder;
 
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name="Userrole")
 //@IdClass(UserRolePK.class)

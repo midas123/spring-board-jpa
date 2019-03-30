@@ -5,17 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
-
 import com.yk.web.BaseTimeEntity;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
 
-//@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
 @Table(name="Users")
@@ -23,7 +20,7 @@ import lombok.AccessLevel;
 public class Users extends BaseTimeEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userid;
+    private int userid;
 
     @Column(length = 45, nullable = false)
     private String username;
@@ -36,10 +33,11 @@ public class Users extends BaseTimeEntity{
     
     @Column(length = 30, nullable = false)
     private String phonenumber;
-    
-    public Users() {
+
+  
+    /*public Users() {
     	
-    }
+    }*/
     
     public Users(Users user){
     }

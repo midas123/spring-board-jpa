@@ -16,15 +16,18 @@ public class UserService {
 	private UserRepository userRepository;
 	private UserRolesRepository userRolesRepository;
 	
+	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	@Transactional
-    public Long createUserAccount(UserRequestDto dto){
+    public int registerUser(UserRequestDto dto){
 		verifyDuplicateEmail(dto.getUsername());
 		verifyDuplicateNickName(dto.getNickname());
 		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
-		return userRepository.save(dto.toEntity()).getUserid();
+		int userId = userRepository.save(dto.toEntity()).getUserid();
+		userId = resisterUserRole(userId);
+		return userId;
 	}
 	
 	private void verifyDuplicateEmail(String email){
@@ -39,8 +42,11 @@ public class UserService {
 		    }
 	}
 	
-	private void registerUser(UserRequestDto dto) {
-		userRepository.save(dto.toEntity());
+	private int resisterUserRole(int userId) {
+		UserRole userRole = new UserRole();
+		userRole.setUserid(userId);
+		userRole.setRole("ROLE_USER");
+		return userRolesRepository.save(userRole).getUserid();
 	}
 	
 	/*public User userLogin(MemberRequestDto dto) {

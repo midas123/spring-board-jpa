@@ -14,7 +14,6 @@ public class CustomUserDetailsService implements UserDetailsService{
 	private final UserRepository userRepository;
 	private final UserRolesRepository userRolesRepository;
 	
-	
 	@Autowired
 	public CustomUserDetailsService(UserRepository userRepository,UserRolesRepository userRolesRepository) {
 	    this.userRepository = userRepository;
@@ -22,14 +21,11 @@ public class CustomUserDetailsService implements UserDetailsService{
 	}
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println("loadUserByUsername:"+username);
 		Users user=userRepository.findByUsername(username);
 		if(null == user){
 			throw new UsernameNotFoundException("No user present with username: "+username);
 		} else {
-			System.out.println("password:"+user.getPassword());
 			List<String> userRoles=userRolesRepository.findRoleByUsername(username);
-			System.out.println("size:"+userRoles.size());
 			return new CustomUserDetails(user,userRoles);
 		}
 	}

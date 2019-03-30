@@ -17,8 +17,8 @@ public class WebRestController {
 	private UserService membersService;
 	
     @PostMapping("/join")
-    public Long joinMember(@Valid @RequestBody UserRequestDto MemberDto) {
-    	return membersService.createUserAccount(MemberDto);
+    public int joinMember(@Valid @RequestBody UserRequestDto MemberDto) {
+    	return membersService.registerUser(MemberDto);
     }
     
  /*   
