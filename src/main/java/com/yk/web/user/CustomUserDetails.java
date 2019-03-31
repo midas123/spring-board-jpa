@@ -14,6 +14,11 @@ public class CustomUserDetails extends Users implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	private List<String> userRoles;
 
+	private boolean accountNonExpired = true; 
+	private boolean accountNonLocked = true; 
+	private boolean credentialsNonExpired = true; 
+	private boolean enabled = true;
+	
  
 	public CustomUserDetails(Users user, List<String> userRoles){
 	    super(user);
@@ -25,26 +30,45 @@ public class CustomUserDetails extends Users implements UserDetails {
 	    String roles=StringUtils.collectionToCommaDelimitedString(userRoles);   
 	    return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
 	}
+
 	
-	@Override
-	public boolean isAccountNonExpired() {  
-	    return true;
+	 @Override 
+	 public boolean isAccountNonExpired() { 
+		 return this.accountNonExpired; 
+		 } 
+	 
+	 public void setAccountNonExpired(boolean accountNonExpired) { 
+		 this.accountNonExpired = accountNonExpired; 
+		 } 
+	 
+	 @Override 
+	 public boolean isAccountNonLocked() { 
+		 return this.accountNonLocked; 
+		 
+		 } 
+	 
+	 public void setAccountNonLocked(boolean accountNonLocked) { 
+		 this.accountNonLocked = accountNonLocked; 
+		 }
+	 
+	 @Override 
+	 public boolean isCredentialsNonExpired() { 
+		 return this.credentialsNonExpired; 
+		 } 
+	 
+	 public void setCredentialsNonExpired(boolean credentialsNonExpired) { 
+		 this.credentialsNonExpired = credentialsNonExpired; 
+		 } 
+	 
+	 @Override 
+	 public boolean isEnabled() { 
+		 return this.enabled; 
+	} 
+	 
+	 public void setEnabled(boolean enabled) { 
+		 this.enabled = enabled; 
 	}
 	
-	@Override
-	public boolean isAccountNonLocked() {
-	    return true;
-	}
-	
-	@Override
-	public boolean isCredentialsNonExpired() {
-	    return true;
-	}
-	
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
 	
 	@Override
 	public String getUsername() {

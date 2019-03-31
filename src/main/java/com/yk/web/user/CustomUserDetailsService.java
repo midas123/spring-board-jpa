@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Users user=userRepository.findByUsername(username);
 		if(null == user){
-			throw new UsernameNotFoundException("No user present with username: "+username);
+			throw new UsernameNotFoundException("아이디 혹은 비밀번호를 잘못 입력하셨습니다.");
 		} else {
 			List<String> userRoles=userRolesRepository.findRoleByUsername(username);
 			return new CustomUserDetails(user,userRoles);

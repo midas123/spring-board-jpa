@@ -265,3 +265,9 @@ input[type=text]:placeholder {
 	padding:20px;
 }
 
+.error-message {
+	color:red;
+	font-size: 13px;
+	left: 30%;
+	width:100%;
+}

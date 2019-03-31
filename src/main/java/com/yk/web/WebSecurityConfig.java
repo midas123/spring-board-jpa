@@ -18,11 +18,12 @@ import com.yk.web.user.CustomUserDetailsService;
 @EnableWebSecurity
 @ComponentScan(basePackageClasses = CustomUserDetailsService.class)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	@Autowired
-	private UserDetailsService userDetailsService;
-	
+	 
 	 @Autowired
-	 public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {    
+	 private UserDetailsService userDetailsService;
+	 
+	 @Autowired
+	 public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
 	  auth.userDetailsService(userDetailsService).passwordEncoder(passwordencoder());
 	 } 
 	
@@ -31,35 +32,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		
 		//h2-console
-		http.authorizeRequests().antMatchers("/h2-console/*").permitAll();
-		http.headers().frameOptions().disable();
+/*		http.authorizeRequests().antMatchers("/h2-console/*").permitAll();
+		http.headers().frameOptions().disable();*/
 		//h2-console END
 		
 		http.authorizeRequests()
-        .antMatchers("/", "/css/**", "/js/**", "/img/**").permitAll()
-        .antMatchers("/join/**").hasRole("ANONYMOUS").anyRequest().authenticated()
-        .antMatchers("/board").hasRole("USER")
-        .anyRequest().authenticated()
+        .antMatchers("/css/**", "/js/**", "/img/**").permitAll()
+        .antMatchers("/join").hasRole("ANONYMOUS")
+        .antMatchers("/board").hasRole("USER").anyRequest().authenticated()
         .and()
         //.antMatchers("/admin/**").hasAnyRole("ROLE_ADMIN", "ROLE_USER")
 		.formLogin()
         .loginPage("/")
-        .loginProcessingUrl("/login")
+        .loginProcessingUrl("/loginPro")
         .defaultSuccessUrl("/board", true)
+        .failureUrl("/login?error")
         .usernameParameter("username")
         .passwordParameter("password")
+        .permitAll()
         .and()
         .logout()
         .and()
         .exceptionHandling().accessDeniedPage("/403");
 	}
 
-	/* @Override
-	    protected void configure(AuthenticationManagerBuilder auth) {
-	        auth.authenticationProvider(authenticationProvider);
-	    }
-	*/
-	
 	
 	@Bean
     public PasswordEncoder passwordencoder() {

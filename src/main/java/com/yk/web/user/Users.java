@@ -16,7 +16,6 @@ import lombok.AccessLevel;
 @Getter
 @Entity
 @Table(name="Users")
-//@IdClass(UserPK.class)
 public class Users extends BaseTimeEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,12 +33,11 @@ public class Users extends BaseTimeEntity{
     @Column(length = 30, nullable = false)
     private String phonenumber;
 
-  
-    /*public Users() {
-    	
-    }*/
     
     public Users(Users user){
+        this.userid = user.userid;
+        this.username = user.username;
+        this.password = user.password;
     }
     
     @Builder
@@ -49,10 +47,5 @@ public class Users extends BaseTimeEntity{
         this.password = password;
         this.phonenumber = phoneNumber;
     }
-
-	/*public void setPassword(String password) {
-		this.password = password;
-	}*/
-    
     
 }

@@ -23,12 +23,13 @@ xmlns:th="http://www.thymeleaf.org">
     </form>
 
     <input type="button" class="fadeIn fourth" id="btn-login" value="로그인"/> -->
-    <form th:action="@{/login}" method="post">
+    <form th:action="@{/loginPro}" method="post">
      <div class="form-group-login">
       <input type="text" id="username" name="username" class="fadeIn second" placeholder="이메일(example@co.kr)" value=""/>
      </div>
      <div class="form-group-login">
       <input type="password" id="password" name="password" class="fadeIn third" placeholder="비밀번호"/>
+      <p th:if="${loginError}" class="error-message">아이디 또는 비밀번호가 다릅니다. </p>
       </div>
     <input type="submit" class="fadeIn fourth" value="로그인"/>
     </form>

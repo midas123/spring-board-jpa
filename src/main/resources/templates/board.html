@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-게시판
+<h3>게시판</h3>
+<span sec:authorize="isAuthenticated()">
+<span sec:authentication="principal.name"></span>님 환영합니다.
+회원님의 등급은 <span sec:authentication="principal.authorities"></span> 입니다.
+</span>
+<form action="#" th:action="@{/logout}" method="post">					
+	<input type="submit" value="로그아웃 하기"/>
+</form>
 </body>
 </html>
