@@ -35,7 +35,6 @@ public class WebController {
 	  
 	  @GetMapping("/board")
 	  public String board(Principal principal) {
-		  System.out.println("principal:"+principal.getName());
 		  return "board";
 	  }
 	  

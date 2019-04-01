@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html
 	  xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
@@ -9,11 +9,22 @@
 <body>
 <h3>게시판</h3>
 <span sec:authorize="isAuthenticated()">
-<span sec:authentication="principal.name"></span>님 환영합니다.
+<span sec:authentication="name"></span>님 환영합니다.
 회원님의 등급은 <span sec:authentication="principal.authorities"></span> 입니다.
 </span>
 <form action="#" th:action="@{/logout}" method="post">					
 	<input type="submit" value="로그아웃 하기"/>
 </form>
+<div sec:authorize="isAuthenticated()">
+  This content is only shown to authenticated users.
+</div>
+
+<div sec:authorize="hasAuthority('USER')">
+  This content is only shown to users.
+</div>
+
+<div sec:authorize="hasAuthority('ADMIN')">
+  This content is only shown to administrators.
+</div>
 </body>
 </html>

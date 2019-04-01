@@ -18,7 +18,7 @@ var main = {
     },
     join : function () {
         var data1 = {
-            username: $('#email').val(),
+            username: $('#username').val(),
             nickname: $('#nickname').val(),
             phoneNumber: $('#phoneNumber').val(),
             password: $('#password').val(),
@@ -40,7 +40,7 @@ var main = {
     
     login : function () {
         var data2 = {
-            username: $('#email').val(),
+            username: $('#username').val(),
             password: $('#password').val()
         };
         console.log(data2);
