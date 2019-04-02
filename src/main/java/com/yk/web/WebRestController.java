@@ -7,6 +7,7 @@ import com.yk.web.user.UserService;
 
 import lombok.AllArgsConstructor;
 import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -14,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 @AllArgsConstructor
 public class WebRestController {
 	
-	private UserService membersService;
+	private UserService userService;
+	
 	
     @PostMapping("/join")
-    public int joinMember(@Valid @RequestBody UserRequestDto MemberDto) {
-    	return membersService.registerUser(MemberDto);
+    public int joinMember(@Valid @RequestBody UserRequestDto UserDto) {
+    	return userService.registerUser(UserDto);
     }
     
  /*   

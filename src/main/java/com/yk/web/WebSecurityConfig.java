@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests()
         .antMatchers("/css/**", "/js/**", "/img/**").permitAll()
+        .antMatchers("/emailConfirm/**").permitAll()
         .antMatchers("/join").hasRole("ANONYMOUS")
         .antMatchers("/board").hasRole("USER").anyRequest().authenticated()
         .and()

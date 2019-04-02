@@ -3,19 +3,30 @@ package com.yk.web.user;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.yk.web.dao.EmailTokenRepository;
+import com.yk.web.entity.EmailToken;
 import com.yk.web.exception.ValidCustomException;
+import com.yk.web.service.EmailSendService;
 
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
 public class UserService {
-	private UserRepository userRepository;
 	private UserRolesRepository userRolesRepository;
 	
+	@Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private EmailTokenRepository emailTokenRepository;
+
+    @Autowired
+    private EmailSendService emailSenderService;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -26,7 +37,8 @@ public class UserService {
 		verifyDuplicateNickName(dto.getNickname());
 		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
 		int userId = userRepository.save(dto.toEntity()).getUserid();
-		userId = resisterUserRole(userId);
+		resisterUserRole(userId);
+		sendVerifycationEmail(dto, userId);
 		return userId;
 	}
 	
@@ -49,9 +61,34 @@ public class UserService {
 		return userRolesRepository.save(userRole).getUserid();
 	}
 	
-	/*public User userLogin(MemberRequestDto dto) {
-		return membersRepository.findByUsernameAndPassword(dto.getEmail(), dto.getPassword());
-	}*/
+	private void sendVerifycationEmail(UserRequestDto dto, int userid) {
+		  Users user = new Users(dto.getUsername(), userid);
+		  EmailToken emailToken = new EmailToken(user);
+
+		  emailTokenRepository.save(emailToken);
+
+          SimpleMailMessage mailMessage = new SimpleMailMessage();
+          mailMessage.setTo(dto.getUsername());
+          mailMessage.setSubject("회원 가입을 환영합니다.");
+          mailMessage.setFrom("admin@gmail.com");
+          mailMessage.setText("링크를 클릭해서 귀하의 이메일을 인증합니다.: "
+          +"http://localhost:8080/emailConfirm/account?token="+emailToken.getConfirmationToken());
+          emailSenderService.sendEmail(mailMessage);
+		
+	}
 	
+	public void confirmEmailToken(String token) {
+		EmailToken emailtoken = emailTokenRepository.findByConfirmationToken(token);
+
+        if(emailtoken != null) {
+            Users user = userRepository.findByUsernameIgnoreCase(emailtoken.getUser().getUsername());
+            user.setEnabled(true);
+            userRepository.save(user);
+        } else {
+        	throw new ValidCustomException("인증 주소가 적절하지 않습니다.", "confirm-email-errormessage");
+        }
+		
+	}
+
 	
 }

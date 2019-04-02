@@ -8,4 +8,41 @@ spring:
     restart:
       enabled : true
   thymeleaf:
-    cache: false    
+    cache: false
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: 
+    username: 
+    password: 
+  jpa:
+    generate-ddl: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.Oracle10gDialect
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    username: 
+    password: 
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    protocol: smtp
+    test-connection: false
+logging:
+  level:
+    org:
+      hibernate:
+        sql: debug
+        type: trace  
+    
+
+    

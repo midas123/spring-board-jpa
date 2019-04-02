@@ -12,7 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
 @Table(name="Users")
@@ -32,7 +32,18 @@ public class Users extends BaseTimeEntity{
     
     @Column(length = 30, nullable = false)
     private String phonenumber;
-
+    
+    @Column(nullable=true)
+    private boolean isEnabled;
+    
+    public Users() {
+    	
+    }
+    
+    public Users(String username, int userid) {
+    	 this.username = username;
+    	 this.userid = userid;
+    }
     
     public Users(Users user){
         this.userid = user.userid;
@@ -47,5 +58,10 @@ public class Users extends BaseTimeEntity{
         this.password = password;
         this.phonenumber = phoneNumber;
     }
+
+	public void setEnabled(boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
+    
     
 }

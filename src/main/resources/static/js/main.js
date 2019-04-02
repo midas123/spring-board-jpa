@@ -31,8 +31,8 @@ var main = {
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data1)
         }).done(function() {
-            alert('회원 가입 되었습니다.');
-            location.href="/";
+            alert('회원 가입 되었습니다. 회원 이메일을 인증해주세요.');
+            location.href="/confirm-page";
         }).fail(function (response) {
         	markingErrorField(response);
         });
@@ -80,6 +80,10 @@ var markingErrorField = function (response) {
         if(error['code'] == "PasswordMatch"){
         	$('#password2-error').remove();
         	$('#password2').after('<span class="error-message" id="password2-error">'+error.defaultMessage+'</span>');
+        }
+        
+        if(error['code'] == "confirm-email-errormessage"){
+        		alert(error.defaultMessage);
         }
        
     }
