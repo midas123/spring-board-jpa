@@ -1,9 +1,12 @@
-package com.yk.web.user;
+package com.yk.web.dao;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import com.yk.web.entity.UserRole;
+
 import org.springframework.data.repository.CrudRepository;
 
 @Repository

@@ -11,22 +11,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
+import com.yk.web.dao.UserRequestDto;
 import com.yk.web.entity.EmailToken;
-import com.yk.web.user.UserRequestDto;
-import com.yk.web.user.UserService;
-import com.yk.web.user.Users;
+import com.yk.web.entity.Users;
+import com.yk.web.service.UserService;
 
 import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
 public class WebController {
-	  UserService userservice;
 	
-/*	  @ModelAttribute("MemberDto")
-	    public MemberRequestDto getMemberDto() {
-	        return new MemberRequestDto();
-	   }*/
+	  UserService userservice;
 	  
 	  @GetMapping("/")
 	  public String main() {
@@ -37,11 +33,6 @@ public class WebController {
 	  public String joinForm() {
 	        return "join";
 	    }
-	  
-	  /*@GetMapping("/emailConfirm/page")
-	  public String confirmPage(Model model) {
-		  return "confirmPage";
-	  }*/
 	  
 	  @GetMapping("/emailConfirm/done")
 	  public String confirmDone(Model model) {

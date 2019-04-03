@@ -1,9 +1,10 @@
-package com.yk.web.user;
+package com.yk.web.dao;
 
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+import com.yk.web.entity.Users;
 import com.yk.web.valid.EmailValid;
 import com.yk.web.valid.PasswordMatch;
 

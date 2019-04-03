@@ -2,8 +2,8 @@ package com.yk.web;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yk.web.user.UserRequestDto;
-import com.yk.web.user.UserService;
+import com.yk.web.dao.UserRequestDto;
+import com.yk.web.service.UserService;
 
 import lombok.AllArgsConstructor;
 import javax.validation.Valid;

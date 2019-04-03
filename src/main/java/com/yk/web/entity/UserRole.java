@@ -1,4 +1,4 @@
-package com.yk.web.user;
+package com.yk.web.entity;
 
 
 import javax.persistence.*;
@@ -7,7 +7,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name="Userrole")
 public class UserRole {
@@ -21,6 +20,10 @@ public class UserRole {
 	
 	@Column(name="role")
 	private String role; 
+	
+	public UserRole() {
+		
+	}
 	
 	@Builder
     public UserRole(int user_role_id, int userid, String role) {

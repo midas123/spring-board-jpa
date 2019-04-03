@@ -1,4 +1,4 @@
-package com.yk.web;
+package com.yk.web.springsecurity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,8 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import com.yk.web.user.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
@@ -37,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		//h2-console END
 		
 		http.authorizeRequests()
-        .antMatchers("/css/**", "/js/**", "/img/**").permitAll()
+        .antMatchers("/css/**", "/js/**", "/img/**", "/login**").permitAll()
         .antMatchers("/emailConfirm/**").permitAll()
         .antMatchers("/join").hasRole("ANONYMOUS")
         .antMatchers("/board").hasRole("USER").anyRequest().authenticated()
@@ -50,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .failureUrl("/login?error")
         .usernameParameter("username")
         .passwordParameter("password")
+        //.failureHandler(new CustomAuthenticationFailHandler())
         .permitAll()
         .and()
         .logout()

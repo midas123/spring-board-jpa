@@ -1,4 +1,4 @@
-package com.yk.web.user;
+package com.yk.web.springsecurity;
 
 
 import java.util.Collection;
@@ -7,6 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
+
+import com.yk.web.entity.Users;
 
 
 public class CustomUserDetails extends Users implements UserDetails { 

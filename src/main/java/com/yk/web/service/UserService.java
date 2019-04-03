@@ -1,4 +1,4 @@
-package com.yk.web.user;
+package com.yk.web.service;
 
 import javax.transaction.Transactional;
 
@@ -8,9 +8,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.yk.web.dao.EmailTokenRepository;
+import com.yk.web.dao.UserRepository;
+import com.yk.web.dao.UserRequestDto;
+import com.yk.web.dao.UserRolesRepository;
 import com.yk.web.entity.EmailToken;
+import com.yk.web.entity.UserRole;
+import com.yk.web.entity.Users;
 import com.yk.web.exception.ValidCustomException;
-import com.yk.web.service.EmailSendService;
 
 import lombok.AllArgsConstructor;
 
@@ -82,7 +86,7 @@ public class UserService {
 
         if(emailtoken != null) {
             Users user = userRepository.findByUsernameIgnoreCase(emailtoken.getUser().getUsername());
-            user.setEnabled(true);
+            user.setIsenabled(true);
             userRepository.save(user);
         } else {
         	throw new ValidCustomException("인증 주소가 적절하지 않습니다.", "confirm-email-errormessage");

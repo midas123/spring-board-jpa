@@ -1,4 +1,4 @@
-package com.yk.web.user;
+package com.yk.web.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import com.yk.web.BaseTimeEntity;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -59,9 +59,12 @@ public class Users extends BaseTimeEntity{
         this.phonenumber = phoneNumber;
     }
 
-	public void setEnabled(boolean isEnabled) {
+	public void setIsenabled(boolean isEnabled) {
 		this.isEnabled = isEnabled;
 	}
     
+	public boolean getIsenabled() {
+		return isEnabled;
+	}
     
 }

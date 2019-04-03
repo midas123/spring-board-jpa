@@ -1,4 +1,6 @@
-package com.yk.web.user;
+package com.yk.web.dao;
+
+import com.yk.web.entity.Users;
 
 import lombok.Builder;
 

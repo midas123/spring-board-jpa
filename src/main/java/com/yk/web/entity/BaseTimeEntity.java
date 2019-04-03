@@ -1,4 +1,4 @@
-package com.yk.web;
+package com.yk.web.entity;
 
 import java.time.LocalDateTime;
 

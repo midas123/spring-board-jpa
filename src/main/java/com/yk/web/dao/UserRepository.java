@@ -1,9 +1,11 @@
-package com.yk.web.user;
+package com.yk.web.dao;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.yk.web.entity.Users;
 
 @Repository
 public interface UserRepository extends JpaRepository<Users, Long>{

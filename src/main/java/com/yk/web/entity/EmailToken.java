@@ -4,8 +4,6 @@ import java.util.UUID;
 
 import javax.persistence.*;
 
-import com.yk.web.user.Users;
-
 import lombok.Getter;
 import lombok.Setter;
 

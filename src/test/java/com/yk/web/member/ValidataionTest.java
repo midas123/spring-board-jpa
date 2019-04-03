@@ -6,7 +6,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import com.yk.web.user.UserRequestDto;
+import com.yk.web.dao.UserRequestDto;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
