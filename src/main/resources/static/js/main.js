@@ -22,7 +22,7 @@ var main = {
             nickname: $('#nickname').val(),
             phoneNumber: $('#phoneNumber').val(),
             password: $('#password').val(),
-            comfirmPassword: $('#password2').val()
+            confirmPassword: $('#password2').val()
         };
         $.ajax({
             type: 'POST',

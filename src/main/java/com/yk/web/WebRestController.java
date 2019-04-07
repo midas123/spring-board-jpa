@@ -3,7 +3,7 @@ package com.yk.web;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yk.web.dao.UserRequestDto;
-import com.yk.web.service.UserService;
+import com.yk.web.service.UserServiceImpl;
 
 import lombok.AllArgsConstructor;
 import javax.validation.Valid;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @AllArgsConstructor
 public class WebRestController {
 	
-	private UserService userService;
+	private UserServiceImpl userService;
 	
 	
     @PostMapping("/join")

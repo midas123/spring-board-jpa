@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests()
         .antMatchers("/css/**", "/js/**", "/img/**", "/login**").permitAll()
-        .antMatchers("/emailConfirm/**").permitAll()
+        .antMatchers("/emailConfirm/**", "/ResetPassword/**").permitAll()
         .antMatchers("/join").hasRole("ANONYMOUS")
         .antMatchers("/board").hasRole("USER").anyRequest().authenticated()
         .and()

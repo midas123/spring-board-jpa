@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.yk.web.dao.UserRepository;
 import com.yk.web.dao.UserRequestDto;
 import com.yk.web.entity.Users;
-import com.yk.web.service.UserService;
+import com.yk.web.service.UserServiceImpl;
 
 
 @RunWith(SpringRunner.class)
@@ -21,7 +21,7 @@ import com.yk.web.service.UserService;
 public class UserServiceTest {
 
 	@Autowired
-	private UserService membersService;
+	private UserServiceImpl membersService;
 
 	@Autowired
 	private UserRepository membersRepository;

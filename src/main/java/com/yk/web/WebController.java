@@ -3,26 +3,39 @@ package com.yk.web;
 
 import java.security.Principal;
 import java.util.Locale;
+import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
 import com.yk.web.dao.UserRequestDto;
 import com.yk.web.entity.EmailToken;
 import com.yk.web.entity.Users;
-import com.yk.web.service.UserService;
+import com.yk.web.password.PasswordResetRequestDto;
+import com.yk.web.password.PasswordResetToken;
+import com.yk.web.password.PasswordResetTokenRepository;
+import com.yk.web.service.EmailSendService;
+import com.yk.web.service.UserServiceImpl;
 
 import lombok.AllArgsConstructor;
-
 @Controller
 @AllArgsConstructor
 public class WebController {
 	
-	  UserService userservice;
+	  @Autowired 
+	  private UserServiceImpl userservice;
+	  
+	  @Autowired 
+	  private PasswordResetTokenRepository tokenRepository;
+	  
+	  @Autowired 
+	  private EmailSendService emailSendService;
 	  
 	  @GetMapping("/")
 	  public String main() {
@@ -57,8 +70,6 @@ public class WebController {
 		  userservice.confirmEmailToken(emailToken);
 		  return "confirmDone";
 	  }
+	  
 	
-	  
-	  
-	 
 }

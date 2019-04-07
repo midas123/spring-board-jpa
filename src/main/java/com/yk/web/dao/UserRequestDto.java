@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @PasswordMatch.List({ 
-	@PasswordMatch(field = "password", fieldMatch = "comfirmPassword", message = "비밀번호가 서로 다릅니다."), 
+	@PasswordMatch(field = "password", fieldMatch = "confirmPassword", message = "비밀번호가 서로 다릅니다."), 
 })
 public class UserRequestDto {
 	private int userid;
@@ -35,7 +35,7 @@ public class UserRequestDto {
 	private String password;
 	
 	@NotBlank(message="비밀번호를 다시 한번 작성해주세요.")
-	private String comfirmPassword;
+	private String confirmPassword;
 	
 	@NotBlank(message = "전화번호를 작성해주세요.")
 	@Pattern(regexp = "[0-9]{10,11}", message = "10~11자리의 숫자만 입력가능합니다")

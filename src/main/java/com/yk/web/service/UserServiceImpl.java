@@ -15,12 +15,13 @@ import com.yk.web.entity.EmailToken;
 import com.yk.web.entity.UserRole;
 import com.yk.web.entity.Users;
 import com.yk.web.exception.ValidCustomException;
+import com.yk.web.password.PasswordResetToken;
 
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
-public class UserService {
+public class UserServiceImpl {
 	private UserRolesRepository userRolesRepository;
 	
 	@Autowired
@@ -83,7 +84,6 @@ public class UserService {
 	
 	public void confirmEmailToken(String token) {
 		EmailToken emailtoken = emailTokenRepository.findByConfirmationToken(token);
-
         if(emailtoken != null) {
             Users user = userRepository.findByUsernameIgnoreCase(emailtoken.getUser().getUsername());
             user.setIsenabled(true);
@@ -91,8 +91,8 @@ public class UserService {
         } else {
         	throw new ValidCustomException("인증 주소가 적절하지 않습니다.", "confirm-email-errormessage");
         }
-		
 	}
-
+	
+	
 	
 }
