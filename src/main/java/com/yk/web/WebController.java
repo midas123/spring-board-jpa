@@ -29,13 +29,8 @@ import lombok.AllArgsConstructor;
 public class WebController {
 	
 	  @Autowired 
-	  private UserServiceImpl userservice;
+	  private UserServiceImpl userServiceImpl;
 	  
-	  @Autowired 
-	  private PasswordResetTokenRepository tokenRepository;
-	  
-	  @Autowired 
-	  private EmailSendService emailSendService;
 	  
 	  @GetMapping("/")
 	  public String main() {
@@ -67,7 +62,7 @@ public class WebController {
 	  
 	  @GetMapping("/emailConfirm/account")
 	  public String confirmUserAccount(@RequestParam("token")String emailToken) {
-		  userservice.confirmEmailToken(emailToken);
+		  userServiceImpl.confirmEmailToken(emailToken);
 		  return "confirmDone";
 	  }
 	  

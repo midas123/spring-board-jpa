@@ -22,6 +22,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 public class UserServiceImpl {
+	@Autowired
 	private UserRolesRepository userRolesRepository;
 	
 	@Autowired
@@ -49,7 +50,7 @@ public class UserServiceImpl {
 	
 	private void verifyDuplicateEmail(String email){
 	    if(userRepository.findByUsername(email) != null){
-	        throw new ValidCustomException("이미 사용중인 이메일 주소 입니다", "email");
+	        throw new ValidCustomException("이미 사용중인 이메일 주소 입니다", "username");
 	    }
 	}
 	
@@ -88,11 +89,17 @@ public class UserServiceImpl {
             Users user = userRepository.findByUsernameIgnoreCase(emailtoken.getUser().getUsername());
             user.setIsenabled(true);
             userRepository.save(user);
+            emailTokenRepository.delete(emailtoken);
         } else {
         	throw new ValidCustomException("인증 주소가 적절하지 않습니다.", "confirm-email-errormessage");
         }
 	}
 	
-	
+	/*public void IsUserEmailTokenEnabled(UserRequestDto dto) {
+		Users user = userRepository.findByUsername(dto.getUsername());
+		if(!user.getIsenabled()) {
+			throw new ValidCustomException("먼저 회원님 이메일 인증을 진행해주세요.", "Not-Enabled");
+		}
+	}*/
 	
 }

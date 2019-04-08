@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.yk.web.dao.UserRepository;
 import com.yk.web.dao.UserRolesRepository;
 import com.yk.web.entity.Users;
+import com.yk.web.exception.ValidCustomException;
 
 
 @Service("customUserDetailsService")
