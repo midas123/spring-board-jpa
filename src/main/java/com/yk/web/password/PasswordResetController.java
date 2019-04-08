@@ -95,10 +95,11 @@ public class PasswordResetController {
                                       BindingResult result, Errors errors) {
         if (result.hasErrors()){
         	model.addAttribute("token", prdto.getToken());
+        	model.addAttribute("error", "유효한 token이 아니므로 비밀번호를 변경 할 수 없습니다.");
         	return "passwordResetToken";
         }
         PasswordResetToken token = tokenRepository.findByToken(prdto.getToken());
-        if(token == null)
+        if(token == null || token.isExpired())
         	return "403";
         Users user = token.getUser();
         String updatedPassword = passwordEncoder.encode(prdto.getPassword());
