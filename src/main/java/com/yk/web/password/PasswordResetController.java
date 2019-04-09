@@ -81,6 +81,7 @@ public class PasswordResetController {
             model.addAttribute("error", "유효한 token이 아닙니다.");
         } else if (resetToken.isExpired()){
             model.addAttribute("error", "token의 유효기간이 종료되었습니다.");
+            tokenRepository.delete(resetToken);
         } else {
             model.addAttribute("token", resetToken.getToken());
         }
@@ -93,14 +94,18 @@ public class PasswordResetController {
     @Transactional
     public String PasswordChangePagePro(Model model, @ModelAttribute("prdto") @Valid PasswordResetDto prdto,  
                                       BindingResult result, Errors errors) {
+    	
+    	PasswordResetToken token = tokenRepository.findByToken(prdto.getToken());
+    	
+    	if(token == null) {
+    		model.addAttribute("error", "유효한 token이 아니므로 비밀번호를 변경 할 수 없습니다.");
+    		return "403";
+    	}
+    	
         if (result.hasErrors()){
         	model.addAttribute("token", prdto.getToken());
-        	model.addAttribute("error", "유효한 token이 아니므로 비밀번호를 변경 할 수 없습니다.");
         	return "passwordResetToken";
         }
-        PasswordResetToken token = tokenRepository.findByToken(prdto.getToken());
-        if(token == null || token.isExpired())
-        	return "403";
         Users user = token.getUser();
         String updatedPassword = passwordEncoder.encode(prdto.getPassword());
         userRepository.updatePassword(updatedPassword, user.getUserid());

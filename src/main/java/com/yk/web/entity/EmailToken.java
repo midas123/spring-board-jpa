@@ -16,7 +16,7 @@ public class EmailToken {
     @Column(name="token_id")
     private long tokenid;
 
-    @Column(name="confirmation_token")
+    @Column(name="confirm_token")
     private String confirmationToken;
 
     @Temporal(TemporalType.TIMESTAMP)

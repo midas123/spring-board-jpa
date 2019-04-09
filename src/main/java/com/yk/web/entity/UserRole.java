@@ -2,10 +2,7 @@ package com.yk.web.entity;
 
 
 import javax.persistence.*;
-
-import lombok.AccessLevel;
 import lombok.Builder;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="Userrole")
