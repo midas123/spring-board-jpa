@@ -26,13 +26,13 @@ var main = {
         };
         $.ajax({
             type: 'POST',
-            url: '/join',
+            url: '/registration',
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data1)
         }).done(function() {
             alert('회원 가입 되었습니다. 회원 이메일을 인증해주세요.');
-            location.href="/confirm-page";
+            location.href="/";
         }).fail(function (response) {
         	markingErrorField(response);
         });

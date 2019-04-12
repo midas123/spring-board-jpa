@@ -1,10 +1,8 @@
-package com.yk.web.password;
+package com.yk.web.entity;
 
 import java.util.Date;
 import java.util.Calendar;
 import javax.persistence.*;
-
-import com.yk.web.entity.Users;
 
 import lombok.Getter;
 import lombok.Setter;

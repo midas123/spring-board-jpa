@@ -38,7 +38,7 @@ public class UserServiceTest {
 				.email("email@naver.com").nickname("nick").password("1234").build();
 
 		//when
-		membersService.registerUser(dto);
+		membersService.userResistrationPro(dto);
 		
 		//then
 		Users member = membersRepository.findAll().get(0);

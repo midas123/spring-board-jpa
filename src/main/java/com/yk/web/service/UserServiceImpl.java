@@ -14,8 +14,7 @@ import com.yk.web.dao.UserRolesRepository;
 import com.yk.web.entity.EmailToken;
 import com.yk.web.entity.UserRole;
 import com.yk.web.entity.Users;
-import com.yk.web.exception.ValidCustomException;
-import com.yk.web.password.PasswordResetToken;
+import com.yk.web.valid.ValidCustomException;
 
 import lombok.AllArgsConstructor;
 
@@ -38,29 +37,29 @@ public class UserServiceImpl {
 	private PasswordEncoder passwordEncoder;
 	
 	@Transactional
-    public int registerUser(UserRequestDto dto){
-		verifyDuplicateEmail(dto.getUsername());
-		verifyDuplicateNickName(dto.getNickname());
+    public int userResistrationPro(UserRequestDto dto){
+		verifyDuplicationEmail(dto.getUsername());
+		verifyDuplicationNickName(dto.getNickname());
 		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
 		int userId = userRepository.save(dto.toEntity()).getUserid();
-		resisterUserRole(userId);
+		UserRoleResistration(userId);
 		sendVerifycationEmail(dto, userId);
 		return userId;
 	}
 	
-	private void verifyDuplicateEmail(String email){
+	private void verifyDuplicationEmail(String email){
 	    if(userRepository.findByUsername(email) != null){
 	        throw new ValidCustomException("이미 사용중인 이메일 주소 입니다", "username");
 	    }
 	}
 	
-	private void verifyDuplicateNickName(String nickname) {
+	private void verifyDuplicationNickName(String nickname) {
 		 if(userRepository.findByNickname(nickname).isPresent()){
 		        throw new ValidCustomException("이미 사용중인 닉네임 입니다", "nickname");
 		    }
 	}
 	
-	private int resisterUserRole(int userId) {
+	private int UserRoleResistration(int userId) {
 		UserRole userRole = new UserRole();
 		userRole.setUserid(userId);
 		userRole.setRole("ROLE_USER");
@@ -91,7 +90,7 @@ public class UserServiceImpl {
             userRepository.save(user);
             emailTokenRepository.delete(emailtoken);
         } else {
-        	throw new ValidCustomException("인증 주소가 적절하지 않습니다.", "confirm-email-errormessage");
+        	throw new ValidCustomException("인증 token 또는 주소가 적절하지 않습니다.", "confirm-email-errormessage");
         }
 	}
 	

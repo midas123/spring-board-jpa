@@ -14,7 +14,7 @@ import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.web.context.request.WebRequest;
 import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
-import com.yk.web.exception.ValidCustomException;
+import com.yk.web.valid.ValidCustomException;
 
 
 @EnableJpaAuditing

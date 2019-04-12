@@ -16,9 +16,9 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.yk.web.dao.UserRequestDto;
 import com.yk.web.entity.EmailToken;
+import com.yk.web.entity.PasswordResetToken;
 import com.yk.web.entity.Users;
 import com.yk.web.password.PasswordResetRequestDto;
-import com.yk.web.password.PasswordResetToken;
 import com.yk.web.password.PasswordResetTokenRepository;
 import com.yk.web.service.EmailSendService;
 import com.yk.web.service.UserServiceImpl;
@@ -37,12 +37,12 @@ public class WebController {
 	        return "main";
 	    }
 	  
-	  @GetMapping("/join")
-	  public String joinForm() {
-	        return "join";
+	  @GetMapping("/registration")
+	  public String registrationForm() {
+	        return "registration";
 	    }
 	  
-	  @GetMapping("/emailConfirm/done")
+	  @GetMapping("/emailConfirmation/done")
 	  public String confirmDone(Model model) {
 		  return "confirmDone";
 	  }
@@ -60,7 +60,7 @@ public class WebController {
 		  return "main";
 	  }
 	  
-	  @GetMapping("/emailConfirm/account")
+	  @GetMapping("/emailConfirmation/account")
 	  public String confirmUserAccount(@RequestParam("token")String emailToken) {
 		  userServiceImpl.confirmEmailToken(emailToken);
 		  return "confirmDone";

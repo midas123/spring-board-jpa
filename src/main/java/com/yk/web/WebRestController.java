@@ -19,17 +19,9 @@ public class WebRestController {
 	@Autowired
 	private UserServiceImpl userServiceImpl;
 	
-	
-    @PostMapping("/join")
-    public int joinMember(@Valid @RequestBody UserRequestDto UserDto) {
-    	return userServiceImpl.registerUser(UserDto);
+    @PostMapping("/registration")
+    public int userRegistration(@Valid @RequestBody UserRequestDto UserDto) {
+    	return userServiceImpl.userResistrationPro(UserDto);
     }
-    
- /*   
-   	//스프링 시큐리티 적용으로 주석처리
-    @PostMapping("/login")
-    public String loginMember(@RequestBody MemberRequestDto MemberDto) {
-    	return membersService.userLogin(MemberDto).getNickname();
-    }*/
     
 }

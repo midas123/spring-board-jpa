@@ -21,8 +21,6 @@ import lombok.Setter;
 	@PasswordMatch(field = "password", fieldMatch = "confirmPassword", message = "비밀번호가 서로 다릅니다."), 
 })
 public class UserRequestDto {
-	private int userid;
-	
 	@NotBlank(message="이메일을 작성해주세요.")
 	//@Email(message = "이메일 양식을 지켜주세요.")
 	@EmailValid

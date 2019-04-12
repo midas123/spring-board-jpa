@@ -12,7 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
 
-//@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
 @Table(name="Users")
@@ -36,9 +36,6 @@ public class Users extends BaseTimeEntity{
     @Column(nullable=true)
     private boolean isEnabled;
     
-    public Users() {
-    	
-    }
     
     public Users(String username, int userid) {
     	 this.username = username;
