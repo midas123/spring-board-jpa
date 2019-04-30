@@ -1,4 +1,4 @@
-package com.yk.web.dao;
+package com.yk.web.dto;
 
 
 import javax.validation.constraints.NotBlank;

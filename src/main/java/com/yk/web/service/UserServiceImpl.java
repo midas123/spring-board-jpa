@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.yk.web.dao.EmailTokenRepository;
 import com.yk.web.dao.UserRepository;
-import com.yk.web.dao.UserRequestDto;
 import com.yk.web.dao.UserRolesRepository;
+import com.yk.web.dto.UserRequestDto;
 import com.yk.web.entity.EmailToken;
 import com.yk.web.entity.UserRole;
 import com.yk.web.entity.Users;
@@ -18,7 +18,7 @@ import com.yk.web.valid.ValidCustomException;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
+//@AllArgsConstructor
 @Service
 public class UserServiceImpl {
 	@Autowired

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
-import com.yk.web.dao.UserRequestDto;
+import com.yk.web.dto.UserRequestDto;
 import com.yk.web.entity.EmailToken;
 import com.yk.web.entity.PasswordResetToken;
 import com.yk.web.entity.Users;

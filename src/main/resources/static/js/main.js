@@ -72,7 +72,6 @@ var markingErrorField = function (response) {
         error = errorFields[i];
         $field = $('#'+error['field']);
         if($field && $field.length > 0){
-            //$field.siblings('.error-message').remove();
         	$('#'+error['field']+'-error').remove();
             $field.after('<span class="error-message" id="'+error['field']+'-error">'+error.defaultMessage+'</span>');
         }
