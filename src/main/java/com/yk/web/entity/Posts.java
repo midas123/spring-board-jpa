@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class Boards {
+public class Posts {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int board_id;
@@ -18,10 +18,10 @@ public class Boards {
 	@Column
 	private String nickname;
 	
-	@Column(length=100, nullable=false)
+	@Column(length=100)
 	private String b_title;
 	
-	@Column(nullable=false)
+	@Column
 	private String b_content;
 	
 	@Column
@@ -30,18 +30,17 @@ public class Boards {
 	@Column
 	private int b_counts;
 
-	@Column(nullable=false)
-	private boolean b_deleted;
+/*	@Column
+	private boolean b_deleted = false;*/
 	
 	
 	@Builder
-	public Boards(String nickname, String b_title, String b_content, int b_like, int b_counts, boolean b_deleted) {
+	public Posts(String nickname, String b_title, String b_content, int b_like, int b_counts) {
 		this.nickname = nickname;
 		this.b_title = b_title;
 		this.b_content = b_content;
 		this.b_like = b_like;
 		this.b_counts = b_counts;
-		this.b_deleted = b_deleted;
 	}
 	
 }

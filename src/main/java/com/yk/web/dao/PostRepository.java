@@ -3,9 +3,9 @@ package com.yk.web.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.yk.web.entity.Boards;
+import com.yk.web.entity.Posts;
 
 @Repository
-public interface BoardRepository extends JpaRepository<Boards, Long>{
+public interface PostRepository extends JpaRepository<Posts, Long>{
 
 }
