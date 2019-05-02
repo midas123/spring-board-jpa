@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.yk.web.dao.UserRepository;
-import com.yk.web.entity.Users;
+import com.yk.user.dao.UserRepository;
+import com.yk.user.entity.Users;
 
 
 @RunWith(SpringRunner.class)
