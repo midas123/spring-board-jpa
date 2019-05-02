@@ -13,34 +13,36 @@ import lombok.NoArgsConstructor;
 public class Posts {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int board_id;
+	private long post_id;
 	
 	@Column
 	private String nickname;
 	
 	@Column(length=100)
-	private String b_title;
+	private String p_title;
 	
 	@Column
-	private String b_content;
+	private String p_content;
+	
+	/*@Column
+	private int b_like;*/
 	
 	@Column
-	private int b_like;
-	
-	@Column
-	private int b_counts;
+	private long p_counts;
 
-/*	@Column
-	private boolean b_deleted = false;*/
+	@Column
+	private boolean p_deleted = false;
+	
+	@Column
+	private boolean p_blinded = false;
 	
 	
 	@Builder
-	public Posts(String nickname, String b_title, String b_content, int b_like, int b_counts) {
+	public Posts(String nickname, String p_title, String p_content, long p_counts) {
 		this.nickname = nickname;
-		this.b_title = b_title;
-		this.b_content = b_content;
-		this.b_like = b_like;
-		this.b_counts = b_counts;
+		this.p_title = p_title;
+		this.p_content = p_content;
+		this.p_counts = p_counts;
 	}
 	
 }

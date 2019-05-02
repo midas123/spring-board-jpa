@@ -12,42 +12,40 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class PostRequestDto {
+	private long post_id;
+	
 	@NotBlank
 	private String nickname;
 	@NotBlank
-	private String b_title;
+	private String p_title;
 	@NotBlank
-	private String b_content;
+	private String p_content;
+	
+	/*@NotBlank
+	private int b_like;*/
 	
 	@NotBlank
-	private int b_like;
-	@NotBlank
-	private int b_counts;
+	private long p_counts;
 	
-	//private boolean b_deleted;
+	private boolean p_deleted;
+	
+	private boolean p_blinded;
 	
 	@Builder
-	public PostRequestDto(String nickname, String b_title, String b_content, int b_like, int b_counts) {
+	public PostRequestDto(String nickname, String p_title, String p_content, long p_counts) {
 		this.nickname = nickname;
-		this.b_title = b_title;
-		this.b_content = b_content;
-		this.b_like = b_like;
-		this.b_counts = b_counts;
+		this.p_title = p_title;
+		this.p_content = p_content;
+		this.p_counts = p_counts;
 	}
 	
 	public Posts toEntity() {
 		return Posts.builder()
 				.nickname(nickname)
-				.b_content(b_content)
-				.b_title(b_title)
-				.b_like(b_like)
-				.b_counts(b_counts)
+				.p_content(p_content)
+				.p_title(p_title)
+				.p_counts(p_counts)
 				.build();
 	}
-	
-	@Override
-	public String toString() {
-		
-		return nickname + b_title + b_content + b_like + b_counts;
-	}
+
 }
