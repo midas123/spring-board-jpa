@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.yk.post.dao.PostRepository;
-import com.yk.post.entity.Posts;
+import com.yk.web.post.dao.PostRepository;
+import com.yk.web.post.entity.Posts;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

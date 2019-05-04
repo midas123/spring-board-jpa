@@ -1,0 +1,88 @@
+package com.yk.web.post.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.yk.web.post.dao.PostLikeRepository;
+import com.yk.web.post.dao.PostRepository;
+import com.yk.web.post.dto.PostLikeRequestDto;
+import com.yk.web.post.dto.PostRequestDto;
+import com.yk.web.post.entity.PostLikes;
+import com.yk.web.post.entity.Posts;
+
+import lombok.AllArgsConstructor;
+
+//@AllArgsConstructor
+@Service
+public class PostService {
+	@Autowired
+	private PostRepository postRepository;
+	
+	@Autowired
+	private PostLikeRepository postLikeRepository;
+	
+	//게시글 쓰기
+	public void writePost(PostRequestDto dto) {
+		postRepository.save(dto.toEntity());
+	}
+	
+	//게시글 목록
+	public List<Posts> ListingPost(){
+		return postRepository.findAll();
+	}
+	
+	//게시글 조회
+	@Transactional
+	public Posts getPost(long post_id) {
+		updatePostHits(post_id);
+		return postRepository.findById(post_id);
+	}
+	
+	@Transactional
+	public Posts getPostWithLike(long post_id) {
+		updatePostHits(post_id);
+		return postRepository.getPostWithLike(post_id);
+	}
+	
+	//게시글 조회수+
+	private void updatePostHits(long post_id) {
+		postRepository.updatePostCounts(post_id);
+	}
+	
+	
+	//게시글 수정
+	@Transactional
+	public void updatePost(long post_id, PostRequestDto dto) {
+		postRepository.updatePostTitleAndContent(post_id ,dto.getP_title() ,dto.getP_content());
+	}
+	
+	//게시글 삭제
+	public void deletePost(long post_id) {
+		postRepository.deleteById(post_id);
+	}
+	
+	//게시글 비공개(관리자)
+	@Transactional
+	public void blindPost(long post_id) {
+		postRepository.updatePostBlinded(post_id);
+	}
+
+	//게시글 추천
+	@Transactional
+	public void likePost(PostLikeRequestDto dto) {
+		isLikedBefore(dto.getPost_id(), dto.getNickname());
+		postLikeRepository.LikeUp(dto.getPost_id(), dto.getKinds(), dto.getNickname());
+	}
+	
+	//중복 추천 방지
+	private void isLikedBefore(long post_id, String nickname) {
+		//postLikeRepository.existsByPost_idAndNickname(post_id, nickname);
+		//valid exception
+	}
+	
+	
+	
+}
