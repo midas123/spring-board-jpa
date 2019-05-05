@@ -26,12 +26,7 @@ public class PostLikes {
 	@Column
 	private String kinds;
 	
-	@Transient
-	long post_id;
-	
-	@Transient
-	String nickname;
-	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="nickname", referencedColumnName="nickname")
 	private Users users;
@@ -42,7 +37,7 @@ public class PostLikes {
 	private Posts post;
 	
 	@Builder
-	public PostLikes(long like_id, long likes, String kinds, long post_id, String nickname) {
+	public PostLikes(long like_id, long likes, String kinds, long post_id) {
 		this.like_id = like_id;
 		this.likes = likes;
 		this.kinds = kinds;

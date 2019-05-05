@@ -1,5 +1,6 @@
 package com.yk.web.user.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.yk.web.post.entity.PostLikes;
 
 import lombok.Builder;
@@ -21,7 +24,7 @@ import lombok.AccessLevel;
 @Getter
 @Entity
 @Table(name="Users")
-public class Users extends BaseTimeEntity{
+public class Users extends BaseTimeEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private int userid;
@@ -41,6 +44,7 @@ public class Users extends BaseTimeEntity{
     @Column(nullable=true)
     private boolean isEnabled;
     
+    @JsonManagedReference
     @OneToMany(mappedBy = "users")
     private List<PostLikes> postLikes;
     

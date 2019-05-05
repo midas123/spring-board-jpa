@@ -1,15 +1,12 @@
 package com.yk.web.post.entity;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.yk.web.post.dto.PostResponseDto;
 import com.yk.web.user.entity.BaseTimeEntity;
-import com.yk.web.user.entity.Users;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -37,11 +34,10 @@ public class Posts extends BaseTimeEntity{
 	private long p_counts;
 
 	@Column
-	private boolean p_deleted = false;
+	private boolean p_deleted;
 	
 	@Column
-	private boolean p_blinded = false;
-	
+	private boolean p_blinded;
 	
 	//@JsonIgnore
 	@JsonManagedReference 
@@ -60,6 +56,12 @@ public class Posts extends BaseTimeEntity{
 	
 	public void setPost_id(long post_id) {
 		this.post_id = post_id;
+	}
+	
+	public PostResponseDto toConvertPostResponseDto() {
+		PostResponseDto dto = new PostResponseDto();
+		//setter 메서드
+		return dto;
 	}
 	
 }

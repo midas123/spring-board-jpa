@@ -6,23 +6,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yk.web.post.entity.PostLikes;
 
 import lombok.Builder;
 
-@Getter
-@Setter
 @NoArgsConstructor
 @ToString
 public class PostLikeRequestDto {
+	
 	private String kinds;
 	
-	private boolean isUP;
+	//@JsonProperty
+	private boolean isLikeUP;
 	
 	private String nickname;
 	
 	private long post_id;
-	
 
 	@Builder
 	public PostLikeRequestDto(String kinds, String nickname, long post_id) {
@@ -30,16 +30,38 @@ public class PostLikeRequestDto {
 		this.nickname = nickname;
 		this.post_id = post_id;
 	} 
-	
-	public PostLikes toEntity() {
-		return PostLikes.builder()
-				.kinds(kinds)
-				.post_id(post_id)
-				.nickname(nickname)
-				.build();
-		}
-	
-	
-	
+
+	public String getKinds() {
+		return kinds;
+	}
+
+	public void setKinds(String kinds) {
+		this.kinds = kinds;
+	}
+
+	public boolean getIsLikeUP() {
+		return isLikeUP;
+	}
+
+	public void setIsLikeUP(boolean isLikeUP) {
+		this.isLikeUP = isLikeUP;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public long getPost_id() {
+		return post_id;
+	}
+
+	public void setPost_id(long post_id) {
+		this.post_id = post_id;
+	}
+
 	
 }
