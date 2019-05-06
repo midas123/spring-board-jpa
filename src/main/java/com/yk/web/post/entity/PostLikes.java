@@ -2,6 +2,8 @@ package com.yk.web.post.entity;
 
 import javax.persistence.*;
 
+import org.springframework.data.annotation.Transient;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.yk.web.user.entity.Users;
 
@@ -26,6 +28,7 @@ public class PostLikes {
 	@Column
 	private String kinds;
 	
+	
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="nickname", referencedColumnName="nickname")
@@ -37,7 +40,7 @@ public class PostLikes {
 	private Posts post;
 	
 	@Builder
-	public PostLikes(long like_id, long likes, String kinds, long post_id) {
+	public PostLikes(long like_id, long likes, String kinds) {
 		this.like_id = like_id;
 		this.likes = likes;
 		this.kinds = kinds;

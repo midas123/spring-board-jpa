@@ -31,13 +31,10 @@ public class Posts extends BaseTimeEntity{
 	private String p_content;
 	
 	@Column
-	private long p_counts;
-
-	@Column
-	private boolean p_deleted;
+	private long likes;
 	
 	@Column
-	private boolean p_blinded;
+	private long p_counts;
 	
 	//@JsonIgnore
 	@JsonManagedReference 
@@ -46,22 +43,31 @@ public class Posts extends BaseTimeEntity{
 	        orphanRemoval = true)
 	private List<PostLikes> postLikes;
 	
+	@JsonManagedReference 
+	@OneToMany(mappedBy = "post2")
+	private List<PostComments> PostComments;
+	
 	@Builder
-	public Posts(String nickname, String p_title, String p_content, long p_counts) {
+	public Posts(long post_id, String nickname, String p_title, String p_content, long likes, long p_counts) {
+		super();
+		this.post_id = post_id;
 		this.nickname = nickname;
 		this.p_title = p_title;
 		this.p_content = p_content;
+		this.likes = likes;
 		this.p_counts = p_counts;
 	}
 	
-	public void setPost_id(long post_id) {
+	
+/*	public void setPost_id(long post_id) {
 		this.post_id = post_id;
-	}
+	}*/
 	
 	public PostResponseDto toConvertPostResponseDto() {
 		PostResponseDto dto = new PostResponseDto();
 		//setter 메서드
 		return dto;
 	}
+	
 	
 }

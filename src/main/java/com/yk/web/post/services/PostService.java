@@ -11,11 +11,9 @@ import com.yk.web.post.dao.PostLikeRepository;
 import com.yk.web.post.dao.PostRepository;
 import com.yk.web.post.dto.PostLikeRequestDto;
 import com.yk.web.post.dto.PostRequestDto;
-import com.yk.web.post.dto.PostResponseDto;
 import com.yk.web.post.entity.PostLikes;
 import com.yk.web.post.entity.Posts;
 import com.yk.web.post.valid.PostLikeException;
-import com.yk.web.user.valid.ValidCustomException;
 
 import lombok.AllArgsConstructor;
 
@@ -31,6 +29,7 @@ public class PostService {
 	//게시글 쓰기
 	public void writePost(PostRequestDto dto) {
 		postRepository.save(dto.toEntity());
+		//postLikeRepository.save(dto.toLikeEntity());
 	}
 	
 	//모든 게시글 목록 조회
@@ -70,7 +69,7 @@ public class PostService {
 	//게시글 추천
 	@Transactional
 	public void likePost(PostLikeRequestDto dto) {
-		isLikedBefore(dto.getPost_id(), dto.getNickname());
+		//isLikedBefore(dto.getPost_id(), dto.getNickname());
 		
 		if(dto.getIsLikeUP() == true) {
 			postLikeRepository.likeUp(dto.getPost_id());

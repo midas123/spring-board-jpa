@@ -25,19 +25,17 @@ public class PostRequestDto {
 	@NotBlank
 	private String p_content;
 
-	@NotBlank
 	private long p_counts;
 	
-	private boolean p_deleted;
-	
-	private boolean p_blinded;
+	private long likes;
 	
 	@Builder
-	public PostRequestDto(String nickname, String p_title, String p_content, long p_counts) {
+	public PostRequestDto(String nickname, String p_title, String p_content, long p_counts, long likes) {
 		this.nickname = nickname;
 		this.p_title = p_title;
 		this.p_content = p_content;
 		this.p_counts = p_counts;
+		this.likes = likes;
 	}
 	
 	public Posts toEntity() {
@@ -46,7 +44,8 @@ public class PostRequestDto {
 				.p_content(p_content)
 				.p_title(p_title)
 				.p_counts(p_counts)
+				.likes(likes)
 				.build();
 	}
-
+	
 }

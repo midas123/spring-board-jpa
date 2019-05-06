@@ -1,13 +1,10 @@
 package com.yk.web.post.dto;
 
 
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.yk.web.post.entity.PostLikes;
 
 import lombok.Builder;
 
