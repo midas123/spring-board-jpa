@@ -59,6 +59,7 @@ public class PostRestController {
 	
 	@PutMapping("/post/like")
 	public String likedPost(@Valid @RequestBody PostLikeRequestDto dto) {
+		System.out.println("controller:"+dto.toString());
 		postService.likePost(dto);
 		return "PostLiked";
 	}

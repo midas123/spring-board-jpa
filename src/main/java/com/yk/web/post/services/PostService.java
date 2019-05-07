@@ -14,6 +14,7 @@ import com.yk.web.post.dto.PostRequestDto;
 import com.yk.web.post.entity.PostLikes;
 import com.yk.web.post.entity.Posts;
 import com.yk.web.post.valid.PostLikeException;
+import com.yk.web.user.entity.Users;
 
 import lombok.AllArgsConstructor;
 
@@ -29,7 +30,6 @@ public class PostService {
 	//게시글 쓰기
 	public void writePost(PostRequestDto dto) {
 		postRepository.save(dto.toEntity());
-		//postLikeRepository.save(dto.toLikeEntity());
 	}
 	
 	//모든 게시글 목록 조회
@@ -41,6 +41,7 @@ public class PostService {
 	@Transactional
 	public Posts getPost(long post_id) {
 		updatePostHits(post_id);
+		Posts post = postRepository.getPostWithLike(post_id);
 		return postRepository.getPostWithLike(post_id);
 	}
 	
@@ -69,13 +70,25 @@ public class PostService {
 	//게시글 추천
 	@Transactional
 	public void likePost(PostLikeRequestDto dto) {
-		//isLikedBefore(dto.getPost_id(), dto.getNickname());
+		long postid = dto.getPost_id();
+		String nickname = dto.getNickname();
+		int userid = dto.getUserid();
+		
+		isLikedBefore(postid, nickname);
+		Posts post = new Posts(postid);
+		Users user = new Users(nickname, userid);
+		dto.setPost(post);
+		dto.setUser(user);
 		
 		if(dto.getIsLikeUP() == true) {
-			postLikeRepository.likeUp(dto.getPost_id());
+			dto.setLikes(1);
+			postLikeRepository.save(dto.toEntity());
+			//postLikeRepository.likeUp(dto.getPost_id());
 		}	
 		if(dto.getIsLikeUP() == false) {
-			postLikeRepository.likeDown(dto.getPost_id());
+			dto.setLikes(-1);
+			postLikeRepository.save(dto.toEntity());
+			//postLikeRepository.likeDown(dto.getPost_id());
 		}
 	}
 	

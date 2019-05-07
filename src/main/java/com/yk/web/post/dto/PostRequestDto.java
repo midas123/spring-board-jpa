@@ -44,7 +44,6 @@ public class PostRequestDto {
 				.p_content(p_content)
 				.p_title(p_title)
 				.p_counts(p_counts)
-				.likes(likes)
 				.build();
 	}
 	

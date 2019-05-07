@@ -16,7 +16,7 @@ public interface PostLikeRepository extends JpaRepository<PostLikes, Long>{
 	
 	@Query("SELECT p FROM PostLikes p WHERE post_id = :post_id AND nickname= :nickname")
 	Optional<PostLikes> isLikedCheck(@Param("post_id") long post_id, @Param("nickname") String nickname);
-	//, @Param("nickname") String nickname
+	
 	@Modifying
 	@Query("UPDATE PostLikes SET likes = likes + 1 WHERE post_id = :post_id AND kinds = 'post'")
 	public void likeUp(@Param("post_id") long post_id);

@@ -11,6 +11,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.Builder;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -38,13 +39,15 @@ public class PostLikes {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="post_id", referencedColumnName="post_id")
 	private Posts post;
+
 	
 	@Builder
-	public PostLikes(long like_id, long likes, String kinds) {
+	public PostLikes(long like_id, long likes, String kinds, Users users, Posts post) {
 		this.like_id = like_id;
 		this.likes = likes;
 		this.kinds = kinds;
+		this.users = users;
+		this.post = post;
 	}
-	
 
 }
