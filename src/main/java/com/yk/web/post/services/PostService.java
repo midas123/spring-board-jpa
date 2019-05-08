@@ -1,8 +1,10 @@
 package com.yk.web.post.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.query.criteria.internal.predicate.IsEmptyPredicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,15 +36,30 @@ public class PostService {
 	
 	//모든 게시글 목록 조회
 	public List<Posts> getAllPost(){
-		return postRepository.getAllPost();
+		List<Posts> pl = postRepository.getAllPost();
+		for(int i=0; i<pl.size(); i++) {
+			Posts p = pl.get(i);
+			List<PostLikes> likelist = p.getPostLikes();
+			if(likelist.size()>0) {
+				likelist = p.AddAllPostLikes(likelist);
+				p.setPostLikes(likelist);
+			}
+		}
+		return pl;
+		//return postRepository.getAllPost();
 	}
 	
 	//게시글 조회
 	@Transactional
 	public Posts getPost(long post_id) {
 		updatePostHits(post_id);
-		Posts post = postRepository.getPostWithLike(post_id);
-		return postRepository.getPostWithLike(post_id);
+		Posts post = postRepository.getPost(post_id);
+		if(post.getPostLikes() != null) {
+			List<PostLikes> ps = post.AddAllPostLikes(post.getPostLikes());
+			post.setPostLikes(ps);
+		}
+		//return postRepository.getPostWithLike(post_id);
+		return post;
 	}
 	
 	//게시글 조회수+
@@ -62,10 +79,10 @@ public class PostService {
 	}
 	
 	//게시글 비공개(관리자)
-	@Transactional
+/*	@Transactional
 	public void blindPost(long post_id) {
 		postRepository.updatePostBlinded(post_id);
-	}
+	}*/
 
 	//게시글 추천
 	@Transactional

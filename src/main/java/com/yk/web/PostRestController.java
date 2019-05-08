@@ -51,11 +51,11 @@ public class PostRestController {
 		return "PostDeleted";
 	}
 	
-	@PutMapping("/post/admin/{post_id}")
+	/*@PutMapping("/post/admin/{post_id}")
 	public String blindPost(@PathVariable long post_id) {
 		postService.blindPost(post_id);
 		return "PostBlinded";
-	}
+	}*/
 	
 	@PutMapping("/post/like")
 	public String likedPost(@Valid @RequestBody PostLikeRequestDto dto) {

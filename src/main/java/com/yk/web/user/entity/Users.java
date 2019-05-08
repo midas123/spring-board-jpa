@@ -49,7 +49,7 @@ public class Users extends BaseTimeEntity implements Serializable {
     private boolean isEnabled;
     
     @JsonManagedReference
-    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PostLikes> postLikes;
     
     public Users(String nickname, int userid){
