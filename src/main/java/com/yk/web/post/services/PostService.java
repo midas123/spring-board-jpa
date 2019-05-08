@@ -13,6 +13,7 @@ import com.yk.web.post.dao.PostLikeRepository;
 import com.yk.web.post.dao.PostRepository;
 import com.yk.web.post.dto.PostLikeRequestDto;
 import com.yk.web.post.dto.PostRequestDto;
+import com.yk.web.post.entity.PostComments;
 import com.yk.web.post.entity.PostLikes;
 import com.yk.web.post.entity.Posts;
 import com.yk.web.post.valid.PostLikeException;
@@ -38,15 +39,23 @@ public class PostService {
 	public List<Posts> getAllPost(){
 		List<Posts> pl = postRepository.getAllPost();
 		for(int i=0; i<pl.size(); i++) {
-			Posts p = pl.get(i);
-			List<PostLikes> likelist = p.getPostLikes();
-			if(likelist.size()>0) {
-				likelist = p.AddAllPostLikes(likelist);
-				p.setPostLikes(likelist);
+			Posts post = pl.get(i);
+			List<PostLikes> postlikelist = post.getPostLikes();
+			if(postlikelist.size()>0) {
+				postlikelist = Posts.addAllLikes(postlikelist, "post");
+				post.setPostLikes(postlikelist);
+			}
+			if(post.getComments() != null) {
+				List<PostComments> com = post.getComments();
+				for(int j=0; j<com.size(); j++) {
+					if(com.get(j) != null) {
+						List<PostLikes> ps = Posts.addAllLikes(post.getComments().get(j).getPostLikes(), "comment");
+						com.get(j).setPostLikes(ps);
+					}
+				}
 			}
 		}
 		return pl;
-		//return postRepository.getAllPost();
 	}
 	
 	//게시글 조회
@@ -55,10 +64,18 @@ public class PostService {
 		updatePostHits(post_id);
 		Posts post = postRepository.getPost(post_id);
 		if(post.getPostLikes() != null) {
-			List<PostLikes> ps = post.AddAllPostLikes(post.getPostLikes());
+			List<PostLikes> ps = Posts.addAllLikes(post.getPostLikes(), "post");
 			post.setPostLikes(ps);
 		}
-		//return postRepository.getPostWithLike(post_id);
+		if(post.getComments() != null) {
+			List<PostComments> com = post.getComments();
+			for(int i=0; i<com.size(); i++) {
+				if(com.get(i) != null) {
+					List<PostLikes> ps = Posts.addAllLikes(post.getComments().get(i).getPostLikes(), "comment");
+					com.get(i).setPostLikes(ps);
+				}
+			}
+		}
 		return post;
 	}
 	
@@ -92,10 +109,9 @@ public class PostService {
 		int userid = dto.getUserid();
 		
 		isLikedBefore(postid, nickname);
-		Posts post = new Posts(postid);
-		Users user = new Users(nickname, userid);
-		dto.setPost(post);
-		dto.setUser(user);
+		dto.setPost(new Posts(postid));
+		dto.setUser(new Users(nickname, userid));
+		dto.setKinds("post");
 		
 		if(dto.getIsLikeUP() == true) {
 			dto.setLikes(1);

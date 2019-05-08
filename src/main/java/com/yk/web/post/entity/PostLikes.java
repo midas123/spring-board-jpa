@@ -39,15 +39,21 @@ public class PostLikes {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="post_id", referencedColumnName="post_id")
 	private Posts post;
+	
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name="com_id", referencedColumnName="com_id")
+	private PostComments comment; 
 
 	
 	@Builder
-	public PostLikes(long like_id, long likes, String kinds, Users users, Posts post) {
+	public PostLikes(long like_id, long likes, String kinds, Users users, Posts post, PostComments comment) {
 		this.like_id = like_id;
 		this.likes = likes;
 		this.kinds = kinds;
 		this.users = users;
 		this.post = post;
+		this.comment = comment;
 	}
 
 }

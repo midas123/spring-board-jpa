@@ -2,6 +2,7 @@ package com.yk.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,25 +19,25 @@ public class CommentRestController {
 	
 	@PostMapping("/comment")
 	public String writeComment(@RequestBody PostCommentRequestDto dto) {
-		System.out.println(dto.toString());
-		postCommentService.writeComment(dto.toEntity());
+		postCommentService.writeComment(dto);
 		return "CommentDone";
 	}
 	
 	@PutMapping("/comment")
-	public String modifyComment(PostCommentRequestDto dto) {
+	public String modifyComment(@RequestBody PostCommentRequestDto dto) {
 		postCommentService.updateComment(dto);
 		return "modifyDone";
 	}
 	
 	@PutMapping("/comment/like")
-	public String likesComment(PostLikeRequestDto dto) {
+	public String likesComment(@RequestBody PostLikeRequestDto dto) {
+		System.out.println(dto.toString());
 		postCommentService.updateCommentLike(dto);
 		return "commentLiked";
 	}
 	
 	@DeleteMapping("/comment")
-	public String deleteComment(PostCommentRequestDto dto) {
+	public String deleteComment(@RequestBody PostCommentRequestDto dto) {
 		postCommentService.deleteComment(dto);
 		return "commentDeleted";
 	}

@@ -14,10 +14,4 @@ public interface PostCommentRepository extends JpaRepository<PostComments, Long>
 	@Query("UPDATE PostComments SET com_content = :com_content WHERE com_id= :com_id")
 	public void updateCommentContent(@Param("com_content") String com_content, @Param("com_id") long com_id);
 	
-/*	@Query
-	public void likeUpComment();
-	
-	@Query
-	public void likeDownComment();
-	*/
 }

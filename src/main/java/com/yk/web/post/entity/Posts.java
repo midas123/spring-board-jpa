@@ -31,8 +31,8 @@ public class Posts extends BaseTimeEntity{
 	
 	@Column(length=100)
 	private String p_title;
-	
 	@Column
+	
 	private String p_content;
 	
 	@Column
@@ -40,7 +40,7 @@ public class Posts extends BaseTimeEntity{
 	
 	//@JsonIgnore
 	@JsonManagedReference 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<PostLikes> postLikes;
 
 	public void setPostLikes(List<PostLikes> postLikes) {
@@ -49,19 +49,24 @@ public class Posts extends BaseTimeEntity{
 	
 	
 	@JsonManagedReference 
-	@OneToMany(mappedBy = "post2", cascade = CascadeType.ALL)
-	private List<PostComments> postComments;
+	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OrderBy("com_re_seq asc")
+	private List<PostComments> comments;
+	
+	public void setComments(List<PostComments> comments) {
+		this.comments = comments;
+	}
 	
 	@Builder
 	public Posts(long post_id, String nickname, String p_title, String p_content, long p_counts,
-			List<PostLikes> postLikes, List<PostComments> postComments) {
+			List<PostLikes> postLikes, List<PostComments> comments) {
 		this.post_id = post_id;
 		this.nickname = nickname;
 		this.p_title = p_title;
 		this.p_content = p_content;
 		this.p_counts = p_counts;
 		this.postLikes = postLikes;
-		this.postComments = postComments;
+		this.comments = comments;
 	}
 	
 	public Posts(long post_id) {
@@ -84,6 +89,36 @@ public class Posts extends BaseTimeEntity{
 		ps.setKinds("post");
 		pslist.add(ps);
 		return pslist;
+	}
+	
+	public List<PostLikes> addAllCommentLikes(List<PostLikes> postLikes){
+		PostLikes ps = new PostLikes();
+		List<PostLikes> pslist = new ArrayList<>();
+		long total =0;
+		for(int i=0; i<postLikes.size(); i++) {
+			long num = postLikes.get(i).getLikes();
+			total = total + num;
+		}
+		ps.setLikes(total);
+		ps.setKinds("comment");
+		pslist.add(ps);
+		return pslist;
+		
+	}
+	
+	public static List<PostLikes> addAllLikes(List<PostLikes> postLikes, String type){
+		PostLikes ps = new PostLikes();
+		List<PostLikes> pslist = new ArrayList<>();
+		long total =0;
+		for(int i=0; i<postLikes.size(); i++) {
+			long num = postLikes.get(i).getLikes();
+			total = total + num;
+		}
+		ps.setLikes(total);
+		ps.setKinds(type);
+		pslist.add(ps);
+		return pslist;
+		
 	}
 	
 	public PostResponseDto toConvertPostResponseDto() {

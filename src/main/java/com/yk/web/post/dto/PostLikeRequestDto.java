@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.yk.web.post.entity.PostComments;
 import com.yk.web.post.entity.PostLikes;
 import com.yk.web.post.entity.Posts;
 import com.yk.web.user.entity.Users;
@@ -28,8 +29,14 @@ public class PostLikeRequestDto {
 	
 	private int userid;
 	
+	private long com_id;
+	
 	@JsonIgnore
 	private Posts post;
+	
+	@JsonIgnore
+	private PostComments comment;
+	
 	@JsonIgnore
 	private Users user;
 
@@ -43,12 +50,12 @@ public class PostLikeRequestDto {
 	public PostLikes toEntity() {
 		return PostLikes.builder()
 			.likes(likes)
-			.kinds(kinds)
+			.comment(comment)
 			.post(post)
 			.users(user)
+			.kinds(kinds)
 			.build();
 	}
-	
 	
 	public long getPost_id() {
 		return post_id;
@@ -113,17 +120,33 @@ public class PostLikeRequestDto {
 	}
 
 
-
 	public int getUserid() {
 		return userid;
 	}
 
 
-
 	public void setUserid(int userid) {
 		this.userid = userid;
 	}
-	
 
+
+	public long getCom_id() {
+		return com_id;
+	}
+
+
+	public void setCom_id(long com_id) {
+		this.com_id = com_id;
+	}
+
+
+	public PostComments getComment() {
+		return comment;
+	}
+
+
+	public void setComment(PostComments comment) {
+		this.comment = comment;
+	}
 	
 }
