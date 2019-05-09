@@ -29,6 +29,13 @@ public class CommentRestController {
 		return "modifyDone";
 	}
 	
+	@PostMapping("/comment/reply")
+	public String replyComment(@RequestBody PostCommentRequestDto dto) {
+		
+		
+		return "commentReplied";
+	}
+	
 	@PutMapping("/comment/like")
 	public String likesComment(@RequestBody PostLikeRequestDto dto) {
 		System.out.println(dto.toString());

@@ -23,15 +23,25 @@ public class PostCommentService {
 	
 	//댓글 쓰기
 	public void writeComment(PostCommentRequestDto dto) {
-		dto.setPost(new Posts(dto.getPost_id()));
+		//게시글 댓글(그룹) 순서
+		long post_id = dto.getPost_id();
+		dto.setPost(new Posts(post_id));
+		Long com_group_seq = postCommentRepository.getComGroupMaxValue(post_id);
+		
+		if(com_group_seq != null) {
+			dto.setCom_group_seq(com_group_seq+1);
+		} else {
+			dto.setCom_group_seq(0);
+		}
 		postCommentRepository.save(dto.toEntity());
 	}
+
 	//댓글 수정
 	@Transactional
 	public void updateComment(PostCommentRequestDto dto) {
-		System.out.println(dto.toString());
 		postCommentRepository.updateCommentContent(dto.getCom_content(), dto.getCom_id());
 	}
+	
 	//댓글 추천
 	@Transactional
 	public void updateCommentLike(PostLikeRequestDto dto) {

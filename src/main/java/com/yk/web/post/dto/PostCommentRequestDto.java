@@ -28,8 +28,12 @@ public class PostCommentRequestDto {
 	private String com_re_name;
 	
 	private long com_re_seq;
+
+	private long com_depth;
 	
 	private long post_id;
+	
+	private long com_group_seq;
 	
 	@JsonIgnore
 	private Posts post;
@@ -53,6 +57,8 @@ public class PostCommentRequestDto {
 				.com_re_name(com_re_name)
 				.com_nickname(com_nickname)
 				.com_re_seq(com_re_seq)
+				.com_depth(com_depth)
+				.com_group_seq(com_group_seq)
 				.post(post)
 				.build();
 	}

@@ -31,8 +31,8 @@ public class Posts extends BaseTimeEntity{
 	
 	@Column(length=100)
 	private String p_title;
-	@Column
 	
+	@Column
 	private String p_content;
 	
 	@Column
@@ -77,43 +77,18 @@ public class Posts extends BaseTimeEntity{
 		this.post_id = post_id;
 	}
 	
-	public List<PostLikes> AddAllPostLikes(List<PostLikes> postLikes) {
-		PostLikes ps = new PostLikes();
-		List<PostLikes> pslist = new ArrayList<>();
-		long total =0;
-		for(int i=0; i<postLikes.size(); i++){
-			long num = postLikes.get(i).getLikes();
-			total = total + num;
-		}
-		ps.setLikes(total);
-		ps.setKinds("post");
-		pslist.add(ps);
-		return pslist;
-	}
-	
-	public List<PostLikes> addAllCommentLikes(List<PostLikes> postLikes){
-		PostLikes ps = new PostLikes();
-		List<PostLikes> pslist = new ArrayList<>();
-		long total =0;
-		for(int i=0; i<postLikes.size(); i++) {
-			long num = postLikes.get(i).getLikes();
-			total = total + num;
-		}
-		ps.setLikes(total);
-		ps.setKinds("comment");
-		pslist.add(ps);
-		return pslist;
-		
-	}
 	
 	public static List<PostLikes> addAllLikes(List<PostLikes> postLikes, String type){
 		PostLikes ps = new PostLikes();
 		List<PostLikes> pslist = new ArrayList<>();
 		long total =0;
+		long like_id = 0;
 		for(int i=0; i<postLikes.size(); i++) {
+			like_id = postLikes.get(i).getLike_id();
 			long num = postLikes.get(i).getLikes();
 			total = total + num;
 		}
+		ps.setLike_id(like_id);
 		ps.setLikes(total);
 		ps.setKinds(type);
 		pslist.add(ps);
