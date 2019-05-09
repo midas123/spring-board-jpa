@@ -23,8 +23,6 @@ public class PostCommentRequestDto {
 	@NotBlank
 	private String com_nickname;
 	
-	//private long com_likes;
-	
 	private String com_re_name;
 	
 	private long com_re_seq;

@@ -35,11 +35,25 @@ public class PostCommentService {
 		}
 		postCommentRepository.save(dto.toEntity());
 	}
+	//댓글 답변(대댓글)
+	public void replyComment(PostCommentRequestDto dto) {
+		//원 댓글의 그룹번호(com_group_seq), post_id, com_re_name 필수
+		long com_group_seq = dto.getCom_group_seq();
+		long post_id = dto.getPost_id();
+		dto.setCom_depth(1);
+		dto.setPost(new Posts(post_id));
+		
+		Long com_re_seq = postCommentRepository.getComReMaxValue(com_group_seq, post_id);
+		if(com_re_seq != null) {
+			dto.setCom_re_seq(com_re_seq+1);
+		}
+		postCommentRepository.save(dto.toEntity());
+	}
 
 	//댓글 수정
 	@Transactional
 	public void updateComment(PostCommentRequestDto dto) {
-		postCommentRepository.updateCommentContent(dto.getCom_content(), dto.getCom_id());
+		postCommentRepository.modfiyCommentContent(dto.getCom_content(), dto.getCom_id());
 	}
 	
 	//댓글 추천
@@ -67,7 +81,10 @@ public class PostCommentService {
 	}
 	
 	//댓글 삭제
+	@Transactional
 	public void deleteComment(PostCommentRequestDto dto) {
-		postCommentRepository.deleteById(dto.getCom_id());
+		//postCommentRepository.deleteById(dto.getCom_id());
+		String com_content = "삭제된 댓글입니다.";
+		postCommentRepository.deleteMessageInComment(com_content, true, dto.getCom_id());
 	}
 }

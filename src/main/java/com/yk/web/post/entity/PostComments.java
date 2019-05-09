@@ -52,6 +52,9 @@ public class PostComments extends BaseTimeEntity{
 	@Column
 	private long com_group_seq;
 	
+	@Column
+	private boolean isDeleted;
+	
 	@JsonManagedReference
 	@OneToMany(mappedBy="comment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	List<PostLikes> postLikes;
@@ -76,7 +79,7 @@ public class PostComments extends BaseTimeEntity{
 	
 	@Builder
 	public PostComments(long com_id, String com_content, String com_nickname, long com_likes, String com_re_name,
-			long com_re_seq, long com_depth, long com_group_seq, List<PostLikes> postLikes, Posts post) {
+			long com_re_seq, long com_depth, long com_group_seq, boolean isDeleted, List<PostLikes> postLikes, Posts post) {
 		this.com_id = com_id;
 		this.com_content = com_content;
 		this.com_nickname = com_nickname;
@@ -84,6 +87,7 @@ public class PostComments extends BaseTimeEntity{
 		this.com_re_seq = com_re_seq;
 		this.com_depth = com_depth;
 		this.com_group_seq = com_group_seq;
+		this.isDeleted = isDeleted;
 		this.postLikes = postLikes;
 		this.post = post;
 	}

@@ -31,8 +31,7 @@ public class CommentRestController {
 	
 	@PostMapping("/comment/reply")
 	public String replyComment(@RequestBody PostCommentRequestDto dto) {
-		
-		
+		postCommentService.replyComment(dto);
 		return "commentReplied";
 	}
 	

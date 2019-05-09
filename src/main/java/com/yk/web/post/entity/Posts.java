@@ -50,7 +50,7 @@ public class Posts extends BaseTimeEntity{
 	
 	@JsonManagedReference 
 	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@OrderBy("com_re_seq asc")
+	@OrderBy("com_group_seq asc, com_re_seq asc")
 	private List<PostComments> comments;
 	
 	public void setComments(List<PostComments> comments) {
