@@ -28,7 +28,7 @@ public class PostRestController {
 		return postService.getPost(post_id);
 	}
 	
-	@GetMapping("/posts")
+	@GetMapping("/post/all")
 	public List<Posts> PostList(){
 		return postService.getAllPost();
 	}

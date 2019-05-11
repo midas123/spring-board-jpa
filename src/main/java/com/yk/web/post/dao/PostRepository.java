@@ -26,7 +26,7 @@ public interface PostRepository extends JpaRepository<Posts, Long>{
 	public void updatePostTitleAndContent(@Param("post_id") long post_id, @Param("p_title") String p_title, @Param("p_content") String p_content);
 	
 	//@Query("SELECT p FROM Posts p LEFT JOIN p.postLikes b ON b.post.post_id = p.post_id")
-	@Query(value="SELECT * FROM Posts p LEFT JOIN (SELECT post_id, SUM(likes) AS likes FROM PostLikes GROUP BY post_id) b ON b.post_id = p.post_id", nativeQuery=true)
+	@Query(value="SELECT * FROM Posts p LEFT JOIN (SELECT post_id, SUM(likes) AS likes FROM PostLikes GROUP BY post_id) b ON b.post_id = p.post_id ORDER BY p.post_id DESC", nativeQuery=true)
 	public List<Posts> getAllPost();
 	
 	//@Query("SELECT p, SUM(b.likes) FROM Posts p JOIN p.postLikes b WHERE b.post.post_id = :post_id")

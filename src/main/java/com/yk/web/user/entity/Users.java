@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -28,10 +29,10 @@ import lombok.AccessLevel;
 @Entity
 @Table(name="Users")
 @ToString
-public class Users extends BaseTimeEntity implements Serializable {
+public class Users extends BaseTimeEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    private int userid;
+    private long userid;
 
     @Column(length = 45, nullable = false)
     private String username;
@@ -48,19 +49,17 @@ public class Users extends BaseTimeEntity implements Serializable {
     @Column(nullable=true)
     private boolean isEnabled;
     
-    @JsonManagedReference
-    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<PostLikes> postLikes;
+    @OneToOne(mappedBy="users")
+    private UserRole userRole;
     
-    public Users(String nickname, int userid){
+    public Users(long userid) {
+    	this.userid= userid;
+    }
+    
+    public Users(String nickname, long userid){
     	this.nickname =nickname;
     	this.userid = userid;
     }
-    
-    /*public Users(String username, int userid) {
-    	 this.username = username;
-    	 this.userid = userid;
-    }*/
     
     public Users(Users user){
         this.userid = user.userid;

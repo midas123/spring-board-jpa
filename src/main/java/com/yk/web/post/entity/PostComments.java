@@ -56,7 +56,7 @@ public class PostComments extends BaseTimeEntity{
 	private boolean isDeleted;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy="comment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="comment", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	List<PostLikes> postLikes;
 	
 	public void setPostLikes(List<PostLikes> postLikes) {

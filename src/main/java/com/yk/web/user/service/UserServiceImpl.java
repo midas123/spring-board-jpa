@@ -37,11 +37,11 @@ public class UserServiceImpl {
 	private PasswordEncoder passwordEncoder;
 	
 	@Transactional
-    public int userResistrationPro(UserRequestDto dto){
+    public long userResistrationPro(UserRequestDto dto){
 		verifyDuplicationEmail(dto.getUsername());
 		verifyDuplicationNickName(dto.getNickname());
 		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
-		int userId = userRepository.save(dto.toEntity()).getUserid();
+		long userId = userRepository.save(dto.toEntity()).getUserid();
 		UserRoleResistration(userId);
 		sendVerifycationEmail(dto, userId);
 		return userId;
@@ -59,14 +59,14 @@ public class UserServiceImpl {
 		    }
 	}
 	
-	private int UserRoleResistration(int userId) {
+	private void UserRoleResistration(long userid) {
 		UserRole userRole = new UserRole();
-		userRole.setUserid(userId);
+		userRole.setUsers(new Users(userid));
 		userRole.setRole("ROLE_USER");
-		return userRolesRepository.save(userRole).getUserid();
+		userRolesRepository.save(userRole);
 	}
 	
-	private void sendVerifycationEmail(UserRequestDto dto, int userid) {
+	private void sendVerifycationEmail(UserRequestDto dto, long userid) {
 		  Users user = new Users(dto.getUsername(), userid);
 		  EmailToken emailToken = new EmailToken(user);
 
@@ -77,12 +77,13 @@ public class UserServiceImpl {
           mailMessage.setSubject("회원 가입을 환영합니다.");
           mailMessage.setFrom("admin@gmail.com");
           mailMessage.setText("링크를 클릭해서 귀하의 이메일을 인증합니다.: "
-          +"http://localhost:8080/emailConfirm/account?token="+emailToken.getConfirmationToken());
+          +"http://localhost:8080/emailConfirmation/account?token="+emailToken.getConfirmationToken());
           emailSenderService.sendEmail(mailMessage);
 		
 	}
 	
 	public void confirmEmailToken(String token) {
+		System.out.println("token");
 		EmailToken emailtoken = emailTokenRepository.findByConfirmationToken(token);
         if(emailtoken != null) {
             Users user = userRepository.findByUsernameIgnoreCase(emailtoken.getUser().getUsername());

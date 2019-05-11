@@ -28,9 +28,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-/*		http.authorizeRequests()
+		http.authorizeRequests()
+		.antMatchers("/login/**", "/emailConfirmation/**", "/ResetPassword/**").permitAll()
         .antMatchers("/css/**", "/js/**", "/img/**").permitAll()
-        .antMatchers("/login**", "/emailConfirmation/**", "/ResetPassword/**").permitAll()
+        .antMatchers("/post/**", "/comment/**").permitAll()
         .antMatchers("/registration").hasRole("ANONYMOUS")
         .antMatchers("/board").hasRole("USER").anyRequest().authenticated()
         .and()
@@ -45,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .logout()
         .and()
-        .exceptionHandling().accessDeniedPage("/403");*/
+        .exceptionHandling().accessDeniedPage("/403");
 	}
 	
 	@Bean

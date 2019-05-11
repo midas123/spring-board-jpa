@@ -22,7 +22,7 @@ public class WebRestController {
 	
 	
     @PostMapping("/registration")
-    public int userRegistration(@Valid @RequestBody UserRequestDto UserDto) {
+    public long userRegistration(@Valid @RequestBody UserRequestDto UserDto) {
     	return userServiceImpl.userResistrationPro(UserDto);
     }
 

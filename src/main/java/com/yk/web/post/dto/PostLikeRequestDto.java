@@ -37,22 +37,13 @@ public class PostLikeRequestDto {
 	@JsonIgnore
 	private PostComments comment;
 	
-	@JsonIgnore
-	private Users user;
-
-/*	@Builder
-	public PostLikeRequestDto(String kinds, String nickname, long post_id) {
-		this.kinds = kinds;
-		this.nickname = nickname;
-		this.post_id = post_id;
-	}*/ 
 	
 	public PostLikes toEntity() {
 		return PostLikes.builder()
 			.likes(likes)
 			.comment(comment)
 			.post(post)
-			.users(user)
+			.nickname(nickname)
 			.kinds(kinds)
 			.build();
 	}
@@ -71,14 +62,6 @@ public class PostLikeRequestDto {
 	
 	public void setPost(Posts post) {
 		this.post = post;
-	}
-	
-	public Users getUser() {
-		return user;
-	}
-	
-	public void setUser(Users user) {
-		this.user = user;
 	}
 
 	public String getKinds() {

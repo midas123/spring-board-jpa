@@ -40,16 +40,26 @@ public class Posts extends BaseTimeEntity{
 	
 	//@JsonIgnore
 	@JsonManagedReference 
-	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<PostLikes> postLikes;
 
+	public void addPostLikes(PostLikes postLike) {
+		postLikes.add(postLike);
+		postLike.setPost(this);
+	}
+	
+	public void removeComment(PostLikes postLike) {
+		postLikes.remove(postLike);
+		postLike.setPost(null);
+	}
+	
 	public void setPostLikes(List<PostLikes> postLikes) {
 		this.postLikes = postLikes; 
 	}
 	
 	
 	@JsonManagedReference 
-	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@OrderBy("com_group_seq asc, com_re_seq asc")
 	private List<PostComments> comments;
 	

@@ -1,10 +1,8 @@
 package com.yk.web.post.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.query.criteria.internal.predicate.IsEmptyPredicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -95,33 +93,21 @@ public class PostService {
 		postRepository.deleteById(post_id);
 	}
 	
-	//게시글 비공개(관리자)
-/*	@Transactional
-	public void blindPost(long post_id) {
-		postRepository.updatePostBlinded(post_id);
-	}*/
-
 	//게시글 추천
 	@Transactional
 	public void likePost(PostLikeRequestDto dto) {
 		long postid = dto.getPost_id();
-		String nickname = dto.getNickname();
-		int userid = dto.getUserid();
-		
-		isLikedBefore(postid, nickname);
+		isLikedBefore(postid, dto.getNickname());
 		dto.setPost(new Posts(postid));
-		dto.setUser(new Users(nickname, userid));
 		dto.setKinds("post");
 		
 		if(dto.getIsLikeUP() == true) {
 			dto.setLikes(1);
 			postLikeRepository.save(dto.toEntity());
-			//postLikeRepository.likeUp(dto.getPost_id());
 		}	
 		if(dto.getIsLikeUP() == false) {
 			dto.setLikes(-1);
 			postLikeRepository.save(dto.toEntity());
-			//postLikeRepository.likeDown(dto.getPost_id());
 		}
 	}
 	

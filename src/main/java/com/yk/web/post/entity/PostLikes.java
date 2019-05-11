@@ -29,29 +29,26 @@ public class PostLikes {
 	@Column
 	private String kinds;
 	
-	
-	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name="nickname", referencedColumnName="nickname")
-	private Users users;
-	
+	@Column 
+	private String nickname;
+
 	@JsonBackReference 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="post_id", referencedColumnName="post_id")
 	private Posts post;
 	
 	@JsonBackReference
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="com_id", referencedColumnName="com_id")
 	private PostComments comment; 
 
 	
 	@Builder
-	public PostLikes(long like_id, long likes, String kinds, Users users, Posts post, PostComments comment) {
+	public PostLikes(long like_id, long likes, String kinds, String nickname, Posts post, PostComments comment) {
 		this.like_id = like_id;
 		this.likes = likes;
 		this.kinds = kinds;
-		this.users = users;
+		this.nickname = nickname;
 		this.post = post;
 		this.comment = comment;
 	}
