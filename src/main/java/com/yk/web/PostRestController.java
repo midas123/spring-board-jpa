@@ -32,16 +32,6 @@ public class PostRestController {
 	@Autowired
 	PostResourceAssembler assembler;
 	
-	@GetMapping("/post/{post_id}")
-	public Resource<Posts> getPost(@PathVariable long post_id) {
-		Posts post = postService.getPost(post_id);
-		Resource<Posts> resource = new Resource<Posts>(post);
-		Link link = new Link("http://localhost:8080/post/all");
-		resource.add(link);
-		 return resource;
-	}
-	
-	
 	@GetMapping("/post/all")
 	public Resources<Resource<Posts>> postList(){
 		List<Resource<Posts>> posts = postService.getAllPost().stream()
@@ -50,7 +40,15 @@ public class PostRestController {
 		return new Resources<>(posts,
 				linkTo(methodOn(PostRestController.class).postList()).withSelfRel());
 	}
-
+	
+	@GetMapping("/post/{post_id}")
+	public Resource<Posts> getPost(@PathVariable long post_id) {
+		Posts post = postService.getPost(post_id);
+		Resource<Posts> resource = new Resource<Posts>(post);
+		Link link = new Link("http://localhost:8080/post/all");
+		resource.add(link);
+		return resource;
+	}
 	
 	@PostMapping("/post")
 	public String WritePost(@RequestBody PostRequestDto dto) {
@@ -69,12 +67,6 @@ public class PostRestController {
 		postService.deletePost(post_id);
 		return "PostDeleted";
 	}
-	
-	/*@PutMapping("/post/admin/{post_id}")
-	public String blindPost(@PathVariable long post_id) {
-		postService.blindPost(post_id);
-		return "PostBlinded";
-	}*/
 	
 	@PutMapping("/post/like")
 	public String likedPost(@Valid @RequestBody PostLikeRequestDto dto) {

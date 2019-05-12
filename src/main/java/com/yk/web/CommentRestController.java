@@ -37,7 +37,6 @@ public class CommentRestController {
 	
 	@PutMapping("/comment/like")
 	public String likesComment(@RequestBody PostLikeRequestDto dto) {
-		System.out.println(dto.toString());
 		postCommentService.updateCommentLike(dto);
 		return "commentLiked";
 	}

@@ -20,7 +20,6 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@ToString
 public class Posts extends BaseTimeEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,30 +42,10 @@ public class Posts extends BaseTimeEntity{
 	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
 	private List<PostLikes> postLikes = new ArrayList<>();
 
-
-	public void addPostLikes(PostLikes postLike) {
-			postLikes.add(postLike);
-			postLike.setPost(this);
-	}
-	
-	public void removeComment(PostLikes postLike) {
-		postLikes.remove(postLike);
-		postLike.setPost(null);
-	}
-	
-	public void setPostLikes(List<PostLikes> postLikes) {
-		this.postLikes = postLikes; 
-	}
-	
-	
 	@JsonManagedReference 
 	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
 	@OrderBy("com_group_seq asc, com_re_seq asc")
 	private List<PostComments> comments = new ArrayList<>();
-	
-	public void setComments(List<PostComments> comments) {
-		this.comments = comments;
-	}
 	
 	@Builder
 	public Posts(long post_id, String nickname, String p_title, String p_content, long p_counts,
@@ -88,7 +67,6 @@ public class Posts extends BaseTimeEntity{
 		this.post_id = post_id;
 	}
 	
-	
 	public static List<PostLikes> addAllLikes(List<PostLikes> postLikes, String type){
 		PostLikes ps = new PostLikes();
 		List<PostLikes> pslist = new ArrayList<>();
@@ -104,7 +82,24 @@ public class Posts extends BaseTimeEntity{
 		ps.setKinds(type);
 		pslist.add(ps);
 		return pslist;
+	}
+	
+	public void addPostLikes(PostLikes postLike) {
+		postLikes.add(postLike);
+		postLike.setPost(this);
+	}
 		
+	public void removeComment(PostLikes postLike) {
+		postLikes.remove(postLike);
+		postLike.setPost(null);
+	}
+	
+	public void setPostLikes(List<PostLikes> postLikes) {
+		this.postLikes = postLikes; 
+	}
+	
+	public void setComments(List<PostComments> comments) {
+		this.comments = comments;
 	}
 	
 	public PostResponseDto toConvertPostResponseDto() {
@@ -112,7 +107,5 @@ public class Posts extends BaseTimeEntity{
 		//setter 메서드
 		return dto;
 	}
-
-	
 	
 }

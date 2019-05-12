@@ -119,7 +119,4 @@ public class PostService {
 			throw new PostLikeException("이미 추천한 글 입니다.");
 		}
 	}
-	
-	
-	
 }

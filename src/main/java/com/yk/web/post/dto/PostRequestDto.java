@@ -29,15 +29,6 @@ public class PostRequestDto {
 	
 	private long likes;
 	
-/*	@Builder
-	public PostRequestDto(String nickname, String p_title, String p_content, long p_counts, long likes) {
-		this.nickname = nickname;
-		this.p_title = p_title;
-		this.p_content = p_content;
-		this.p_counts = p_counts;
-		this.likes = likes;
-	}*/
-	
 	public Posts toEntity() {
 		return Posts.builder()
 				.nickname(nickname)
