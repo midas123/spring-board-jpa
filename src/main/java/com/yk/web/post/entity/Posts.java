@@ -40,12 +40,13 @@ public class Posts extends BaseTimeEntity{
 	
 	//@JsonIgnore
 	@JsonManagedReference 
-	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<PostLikes> postLikes;
+	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
+	private List<PostLikes> postLikes = new ArrayList<>();
+
 
 	public void addPostLikes(PostLikes postLike) {
-		postLikes.add(postLike);
-		postLike.setPost(this);
+			postLikes.add(postLike);
+			postLike.setPost(this);
 	}
 	
 	public void removeComment(PostLikes postLike) {
@@ -59,9 +60,9 @@ public class Posts extends BaseTimeEntity{
 	
 	
 	@JsonManagedReference 
-	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
 	@OrderBy("com_group_seq asc, com_re_seq asc")
-	private List<PostComments> comments;
+	private List<PostComments> comments = new ArrayList<>();
 	
 	public void setComments(List<PostComments> comments) {
 		this.comments = comments;

@@ -33,7 +33,7 @@ public interface PostRepository extends JpaRepository<Posts, Long>{
 /*	@Query(value="SELECT * FROM Posts p LEFT JOIN (SELECT post_id, SUM(likes) AS likes FROM PostLikes "
 			+ "GROUP BY post_id) l ON p.post_id = l.post_id "
 			+ "WHERE p.post_id = :post_id", nativeQuery=true)*/
-	@Query(value="SELECT * FROM Posts p JOIN PostLikes l ON p.post_id = l.post_id WHERE p.post_id = :post_id", nativeQuery=true)
+	@Query(value="SELECT * FROM Posts p LEFT JOIN PostLikes l ON p.post_id = l.post_id WHERE p.post_id = :post_id", nativeQuery=true)
 	public Posts getPost(@Param("post_id") long post_id);
 	
 }

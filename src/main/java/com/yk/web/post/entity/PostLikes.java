@@ -33,12 +33,12 @@ public class PostLikes {
 	private String nickname;
 
 	@JsonBackReference 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="post_id", referencedColumnName="post_id")
 	private Posts post;
 	
 	@JsonBackReference
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="com_id", referencedColumnName="com_id")
 	private PostComments comment; 
 

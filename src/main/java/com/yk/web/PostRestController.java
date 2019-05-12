@@ -1,10 +1,16 @@
 package com.yk.web;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.Resources;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,16 +29,29 @@ public class PostRestController {
 	@Autowired
 	private PostService postService;
 	
+	@Autowired
+	PostResourceAssembler assembler;
+	
 	@GetMapping("/post/{post_id}")
-	public Posts getPost(@PathVariable long post_id) {
-		return postService.getPost(post_id);
+	public Resource<Posts> getPost(@PathVariable long post_id) {
+		Posts post = postService.getPost(post_id);
+		Resource<Posts> resource = new Resource<Posts>(post);
+		Link link = new Link("http://localhost:8080/post/all");
+		resource.add(link);
+		 return resource;
 	}
 	
+	
 	@GetMapping("/post/all")
-	public List<Posts> PostList(){
-		return postService.getAllPost();
+	public Resources<Resource<Posts>> postList(){
+		List<Resource<Posts>> posts = postService.getAllPost().stream()
+				.map(assembler::toResource).collect(Collectors.toList());
+		
+		return new Resources<>(posts,
+				linkTo(methodOn(PostRestController.class).postList()).withSelfRel());
 	}
 
+	
 	@PostMapping("/post")
 	public String WritePost(@RequestBody PostRequestDto dto) {
 		postService.writePost(dto);

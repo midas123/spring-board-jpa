@@ -61,6 +61,7 @@ public class PostService {
 	public Posts getPost(long post_id) {
 		updatePostHits(post_id);
 		Posts post = postRepository.getPost(post_id);
+		
 		if(post.getPostLikes() != null) {
 			List<PostLikes> ps = Posts.addAllLikes(post.getPostLikes(), "post");
 			post.setPostLikes(ps);
