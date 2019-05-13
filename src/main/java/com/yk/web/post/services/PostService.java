@@ -14,7 +14,7 @@ import com.yk.web.post.dto.PostRequestDto;
 import com.yk.web.post.entity.PostComments;
 import com.yk.web.post.entity.PostLikes;
 import com.yk.web.post.entity.Posts;
-import com.yk.web.post.valid.PostLikeException;
+import com.yk.web.post.exception.PostException;
 import com.yk.web.user.entity.Users;
 
 import lombok.AllArgsConstructor;
@@ -58,9 +58,13 @@ public class PostService {
 	
 	//게시글 조회
 	@Transactional
-	public Posts getPost(long post_id) {
+	public Posts getOnePost(long post_id) {
 		updatePostHits(post_id);
-		Posts post = postRepository.getPost(post_id);
+		Posts post = postRepository.getOnePost(post_id);
+		
+		if(post == null) {
+			throw new PostException("게시글이 존재하지 않습니다.");
+		}
 		
 		if(post.getPostLikes() != null) {
 			List<PostLikes> ps = Posts.addAllLikes(post.getPostLikes(), "post");
@@ -116,7 +120,7 @@ public class PostService {
 	private void isLikedBefore(long post_id, String nickname) {
 		Optional<PostLikes> PostLikesOp = postLikeRepository.isLikedCheck(post_id, nickname);
 		if(PostLikesOp.isPresent()) {
-			throw new PostLikeException("이미 추천한 글 입니다.");
+			throw new PostException("이미 추천한 글 입니다.");
 		}
 	}
 }

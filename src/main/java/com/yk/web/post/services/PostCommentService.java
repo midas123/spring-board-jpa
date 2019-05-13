@@ -14,7 +14,7 @@ import com.yk.web.post.dto.PostLikeRequestDto;
 import com.yk.web.post.entity.PostComments;
 import com.yk.web.post.entity.PostLikes;
 import com.yk.web.post.entity.Posts;
-import com.yk.web.post.valid.PostLikeException;
+import com.yk.web.post.exception.PostException;
 import com.yk.web.user.entity.Users;
 
 @Service
@@ -83,7 +83,7 @@ public class PostCommentService {
 	private void isLikedComBefore(long com_id, String nickname) {
 		Optional<PostLikes> PostLikesOp = postLikeRepository.isLikedComCheck(com_id, nickname);
 		if(PostLikesOp.isPresent()) {
-			throw new PostLikeException("이미 추천한 댓글 입니다.");
+			throw new PostException("이미 추천한 댓글 입니다.");
 		}
 	}
 	

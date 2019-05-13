@@ -42,8 +42,8 @@ public class PostRestController {
 	}
 	
 	@GetMapping("/post/{post_id}")
-	public Resource<Posts> getPost(@PathVariable long post_id) {
-		Posts post = postService.getPost(post_id);
+	public Resource<Posts> getOnePost(@PathVariable long post_id) {
+		Posts post = postService.getOnePost(post_id);
 		Resource<Posts> resource = new Resource<Posts>(post);
 		Link link = new Link("http://localhost:8080/post/all");
 		resource.add(link);

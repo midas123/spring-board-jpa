@@ -13,7 +13,7 @@ public class PostResourceAssembler implements ResourceAssembler<Posts, Resource<
 	public Resource<Posts> toResource(Posts entity) {
 		
 		 return new Resource<>(entity,
-			      linkTo(methodOn(PostRestController.class).getPost(entity.getPost_id())).withSelfRel(),
+			      linkTo(methodOn(PostRestController.class).getOnePost(entity.getPost_id())).withSelfRel(),
 			      linkTo(methodOn(PostRestController.class).postList()).withRel("all"));
 	}
 }

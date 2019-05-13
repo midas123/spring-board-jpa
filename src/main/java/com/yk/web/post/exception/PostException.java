@@ -1,11 +1,11 @@
-package com.yk.web.post.valid;
+package com.yk.web.post.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class PostLikeException extends RuntimeException{
-	public PostLikeException(String message) {
+public class PostException extends RuntimeException{
+	public PostException(String message) {
 		super(message);
 	}
 

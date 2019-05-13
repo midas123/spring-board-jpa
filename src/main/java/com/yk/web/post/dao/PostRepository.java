@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.yk.web.post.dto.PostResponseDto;
 import com.yk.web.post.entity.Posts;
 
 @Repository
@@ -33,7 +32,7 @@ public interface PostRepository extends JpaRepository<Posts, Long>{
 /*	@Query(value="SELECT * FROM Posts p LEFT JOIN (SELECT post_id, SUM(likes) AS likes FROM PostLikes "
 			+ "GROUP BY post_id) l ON p.post_id = l.post_id "
 			+ "WHERE p.post_id = :post_id", nativeQuery=true)*/
-	@Query(value="SELECT * FROM Posts p LEFT JOIN PostLikes l ON p.post_id = l.post_id WHERE p.post_id = :post_id", nativeQuery=true)
-	public Posts getPost(@Param("post_id") long post_id);
+	@Query(value="SELECT * FROM Posts p LEFT JOIN (SELECT post_id, SUM(likes) AS likes FROM PostLikes GROUP BY post_id) l ON p.post_id = l.post_id LEFT JOIN PostComments c ON c.post_id = p.post_id WHERE p.post_id = :post_id", nativeQuery=true)
+	public Posts getOnePost(@Param("post_id") long post_id);
 	
 }
