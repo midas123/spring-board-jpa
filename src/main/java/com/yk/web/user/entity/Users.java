@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.yk.web.image.UserImages;
 import com.yk.web.post.entity.PostLikes;
 
 import lombok.Builder;
@@ -51,6 +52,9 @@ public class Users extends BaseTimeEntity {
     
     @OneToOne(mappedBy="users")
     private UserRole userRole;
+    
+    @OneToOne(mappedBy="users_images")
+    private UserImages userImages;
     
     public Users(long userid) {
     	this.userid= userid;

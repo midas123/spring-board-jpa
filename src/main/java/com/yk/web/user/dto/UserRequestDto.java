@@ -4,6 +4,7 @@ package com.yk.web.user.dto;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+import com.yk.web.image.UserImagesRequestDto;
 import com.yk.web.user.entity.Users;
 import com.yk.web.user.valid.EmailValid;
 import com.yk.web.user.valid.PasswordMatch;
@@ -39,6 +40,15 @@ public class UserRequestDto {
 	@Pattern(regexp = "[0-9]{10,11}", message = "10~11자리의 숫자만 입력가능합니다")
 	private String phoneNumber;
 	
+	private String file_type;
+	
+	private String file_origin_name;
+	
+	private String file_save_name;
+	
+	private byte[] file_data;
+	
+	
 	@Builder
 	public UserRequestDto(String email, String nickname, String password, String phoneNumber) {
 		this.username = email;
@@ -53,6 +63,15 @@ public class UserRequestDto {
 				.nickname(nickname)
 				.password(password)
 				.phoneNumber(phoneNumber)
+				.build();
+	}
+	
+	public UserImagesRequestDto toConvertUserImagesRequestDto() {
+		return UserImagesRequestDto.builder()
+				.file_type(file_type)
+				.file_origin_name(file_origin_name)
+				.file_save_name(file_save_name)
+				.file_data(file_data)
 				.build();
 	}
 	
