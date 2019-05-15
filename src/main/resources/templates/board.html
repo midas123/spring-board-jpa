@@ -12,6 +12,9 @@
 <span sec:authentication="name"></span>님 환영합니다.
 회원님의 등급은 <span sec:authentication="principal.authorities"></span> 입니다.
 </span>
+<div>
+<img th:src="@{/image/user/${userid}}">
+</div>
 <form action="#" th:action="@{/logout}" method="post">					
 	<input type="submit" value="로그아웃 하기"/>
 </form>

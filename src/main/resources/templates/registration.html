@@ -8,31 +8,37 @@ xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" type="text/css" href="css/join.css">
 </head>
 <body>
-<form>
+<form id="form-data" enctype="multipart/form-data" method="post">
 <div class="member-form" style="margin-top:10%;">
 	<div class="member-header">
 	    <h5 class="modal-title" id="savePostsLabel">회원 가입</h5>
 	</div>
 	<div class="member-form-item">
 	    <label for="title">이메일</label>
-	  <input type="text" class="form-control" id="username" placeholder="email@example.com"/>
+	  <input type="text" class="form-control" id="username" name="username" placeholder="email@example.com"/>
 	</div>
 	<div class="member-form-item">
 	    <label for="author">닉네임</label>
-	    <input type="text" class="form-control" id="nickname"/>
+	    <input type="text" class="form-control" id="nickname" name="nickname"/>
 	</div>
 	<div class="member-form-item">
 	    <label for="phone-number">휴대폰 번호</label>
-	    <input type="text" class="form-control" id="phoneNumber"/>
+	    <input type="text" class="form-control" id="phonenumber" name="phonenumber"/>
 	</div>
 	<div class="member-form-item">
     <label for="password">비밀번호</label>
-         <input type="password" id="password" class="form-control"/>
+         <input type="password" id="password" name="password" class="form-control"/>
     </div>
     <div class="member-form-item">
         <label for="password">비밀번호 확인</label>
-        <input type="password" class="form-control" id="password2"/>
+        <input type="password" class="form-control" id="password2" name="confirmpassword"/>
     </div>
+    <div class="member-form-item">
+        <label for="file">프로필 이미지</label>
+        <input type="file" name="file_data"/>
+    </div>
+    <button type="submit">가입</button>
+
 	<div class="member-footer">
 	    <button type="button" class="btn btn-primary" id="btn-save" style="background-color:#56baed; border-color:#56baed;">가입</button>
 	    <button type="button" class="btn btn-secondary" onclick="javascript:location.href='/';" style="background-color:#999999; border-color:#999999;">취소</button>

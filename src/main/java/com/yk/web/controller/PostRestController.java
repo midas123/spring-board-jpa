@@ -1,4 +1,4 @@
-package com.yk.web;
+package com.yk.web.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yk.web.PostResourceAssembler;
 import com.yk.web.post.dto.PostLikeRequestDto;
 import com.yk.web.post.dto.PostRequestDto;
 import com.yk.web.post.entity.Posts;

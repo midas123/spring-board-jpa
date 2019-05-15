@@ -1,5 +1,9 @@
 package com.yk.web.image;
 
+import java.io.IOException;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.yk.web.user.entity.Users;
 
 import lombok.Builder;
@@ -21,11 +25,13 @@ public class UserImagesRequestDto {
 	
 	private Users users_images;
 	
-	private byte[] file_data;
+	//private byte[] file_data;
+	
+	private MultipartFile file_data;
 	
 	@Builder
 	public UserImagesRequestDto(long image_id, String file_type, String file_origin_name, String file_save_name,
-			Users users_images, byte[] file_data) {
+			Users users_images, MultipartFile file_data, Users user) {
 		this.image_id = image_id;
 		this.file_type = file_type;
 		this.file_origin_name = file_origin_name;
@@ -34,14 +40,14 @@ public class UserImagesRequestDto {
 		this.file_data = file_data;
 	}
 	
-	public UserImages toEntity() {
+	public UserImages toEntity() throws IOException {
 		return UserImages.builder()
 				.file_type(file_type)
 				.file_origin_name(file_origin_name)
 				.file_save_name(file_save_name)
 				.users_images(users_images)
 				.image_id(image_id)
-				.file_data(file_data)
+				.users_images(users_images)
 				.build();
 	}
 

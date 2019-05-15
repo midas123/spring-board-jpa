@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
 import com.yk.web.user.valid.ValidCustomException;
@@ -60,9 +61,5 @@ public class MyBoardApplication {
     public SpringSecurityDialect springSecurityDialect(){
         return new SpringSecurityDialect();
     }
-
-	
-
-
 
 }

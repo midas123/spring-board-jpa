@@ -4,6 +4,8 @@ package com.yk.web.user.dto;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.yk.web.image.UserImagesRequestDto;
 import com.yk.web.user.entity.Users;
 import com.yk.web.user.valid.EmailValid;
@@ -13,13 +15,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 @PasswordMatch.List({ 
-	@PasswordMatch(field = "password", fieldMatch = "confirmPassword", message = "비밀번호가 서로 다릅니다."), 
+	@PasswordMatch(field = "password", fieldMatch = "confirmpassword", message = "비밀번호가 서로 다릅니다."), 
 })
 public class UserRequestDto {
 	@NotBlank(message="이메일을 작성해주세요.")
@@ -34,11 +38,11 @@ public class UserRequestDto {
 	private String password;
 	
 	@NotBlank(message="비밀번호를 다시 한번 작성해주세요.")
-	private String confirmPassword;
+	private String confirmpassword;
 	
 	@NotBlank(message = "전화번호를 작성해주세요.")
 	@Pattern(regexp = "[0-9]{10,11}", message = "10~11자리의 숫자만 입력가능합니다")
-	private String phoneNumber;
+	private String phonenumber;
 	
 	private String file_type;
 	
@@ -46,7 +50,7 @@ public class UserRequestDto {
 	
 	private String file_save_name;
 	
-	private byte[] file_data;
+	private MultipartFile file_data;
 	
 	
 	@Builder
@@ -54,7 +58,7 @@ public class UserRequestDto {
 		this.username = email;
 		this.nickname = nickname;
 		this.password = password;
-		this.phoneNumber = phoneNumber;
+		this.phonenumber = phoneNumber;
 	}
 	
 	public Users toEntity() {
@@ -62,7 +66,7 @@ public class UserRequestDto {
 				.username(username)
 				.nickname(nickname)
 				.password(password)
-				.phoneNumber(phoneNumber)
+				.phoneNumber(phonenumber)
 				.build();
 	}
 	

@@ -38,6 +38,7 @@ public class UserServiceImpl {
 	
 	@Transactional
     public long userResistrationPro(UserRequestDto dto){
+		System.out.println(dto.toString());
 		verifyDuplicationEmail(dto.getUsername());
 		verifyDuplicationNickName(dto.getNickname());
 		dto.setPassword(passwordEncoder.encode(dto.getPassword()));

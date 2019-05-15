@@ -2,7 +2,7 @@ var main = {
     init : function () {
         var _this = this;
         $('#btn-save').on('click', function () {
-            _this.join();
+            //_this.join();
         });
         
         $('#btn-login').on('click', function() {
@@ -20,10 +20,11 @@ var main = {
         var data1 = {
             username: $('#username').val(),
             nickname: $('#nickname').val(),
-            phoneNumber: $('#phoneNumber').val(),
+            phonenumber: $('#phonenumber').val(),
             password: $('#password').val(),
-            confirmPassword: $('#password2').val()
+            confirmpassword: $('#password2').val()
         };
+        console.log("JSON.stringify: "+JSON.stringify(data1));
         $.ajax({
             type: 'POST',
             url: '/registration',

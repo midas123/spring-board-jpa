@@ -5,6 +5,7 @@ import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Component;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
+import com.yk.web.controller.PostRestController;
 import com.yk.web.post.entity.Posts;
 
 @Component
