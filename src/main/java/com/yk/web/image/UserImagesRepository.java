@@ -9,4 +9,8 @@ import org.springframework.data.repository.query.Param;
 public interface UserImagesRepository extends JpaRepository<UserImages, Long>{
 	@Query(value="SELECT u FROM UserImages u WHERE users_images.userid=:userid")
 	public UserImages getOneUserImage(@Param("userid") long userid);
+	
+	@Query(value="SELECT u FROM UserImages u WHERE users_images.userid = ?1")
+	public UserImages FindByUserid(long userid);
+	
 }

@@ -12,12 +12,11 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
     	String in_path = "classpath:/static/"; //프로젝트 내부
-    	String ex_path = "file:///C:/Users/yk1/Desktop/upload/"; //외부
+    	String ex_path = "file:///C:/Users/yk1/Desktop/upload2/images/"; //외부
        registry
-               .addResourceHandler("/**")
-               .addResourceLocations(in_path, ex_path) 
+               .addResourceHandler("/**", "/images/**").addResourceLocations(in_path, ex_path);
                //.setCachePeriod(3600)
-               .resourceChain(true)
-               .addResolver(new PathResourceResolver());
+              // .resourceChain(true)
+              // .addResolver(new PathResourceResolver());
     }
 } 
