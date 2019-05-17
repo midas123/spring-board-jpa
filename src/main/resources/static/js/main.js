@@ -3,6 +3,7 @@ var main = {
         var _this = this;
         $('#btn-save').on('click', function () {
             //_this.join();
+        	_this.joinFileUpload();
         });
         
         $('#btn-login').on('click', function() {
@@ -27,7 +28,7 @@ var main = {
         console.log("JSON.stringify: "+JSON.stringify(data1));
         $.ajax({
             type: 'POST',
-            url: '/registration',
+            url: '/registration/2',
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data1)
@@ -57,12 +58,43 @@ var main = {
         	console.log(response);
         	alert('계정 또는 비밀번호가 다릅니다.');
         });
+    },
+    
+    joinFileUpload : function(){
+    	   var form = $('#form-data')[0];
+
+    	    var data = new FormData(form);
+
+    	    //$("#btnSubmit").prop("disabled", true);
+
+    	    $.ajax({
+    	        type: "POST",
+    	        enctype: 'multipart/form-data',
+    	        url: "/registration",
+    	        data: data,
+    	        processData: false, //prevent jQuery from automatically transforming the data into a query string
+    	        contentType: false,
+    	        cache: false,
+    	        timeout: 600000,
+    	        success : function (data) {
+    	        	alert('회원 가입 되었습니다. 회원 이메일을 인증해주세요.');
+    	            location.href="/";
+    	            //$("#btnSubmit").prop("disabled", false);
+    	        },
+    	        error : function ($xhr) {
+    	        	 var res = $xhr.responseJSON;
+    	        	 markingErrorField(res);
+    	        }
+    	    });
+    	
     }
 };
 
 
 var markingErrorField = function (response) {
-    const errorFields = response.responseJSON.errors;
+    //const errorFields = response.responseJSON.errors; //join
+    const errorFields = response.errors; //joinFileUpload
+    
     if(!errorFields){
         alert(response.response.message);
         return;

@@ -51,6 +51,10 @@ public class WebRestController {
     	
     	return userId;
     }
-
+    
+    @PostMapping("/registration/2")
+    public long userRegistration(@Valid @RequestBody UserRequestDto UserDto) {
+    	return userServiceImpl.userResistrationPro(UserDto);
+    }
     
 }
