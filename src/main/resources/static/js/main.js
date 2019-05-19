@@ -63,7 +63,7 @@ var main = {
     joinFileUpload : function(){
     	   var form = $('#form-data')[0];
 
-    	    var data = new FormData(form);
+    	   var data = new FormData(form);
 
     	    //$("#btnSubmit").prop("disabled", true);
 
@@ -72,10 +72,10 @@ var main = {
     	        enctype: 'multipart/form-data',
     	        url: "/registration",
     	        data: data,
-    	        processData: false, //prevent jQuery from automatically transforming the data into a query string
+    	        processData: false, 
     	        contentType: false,
     	        cache: false,
-    	        timeout: 600000,
+    	        timeout: 600000/*,
     	        success : function (data) {
     	        	alert('회원 가입 되었습니다. 회원 이메일을 인증해주세요.');
     	            location.href="/";
@@ -84,16 +84,20 @@ var main = {
     	        error : function ($xhr) {
     	        	 var res = $xhr.responseJSON;
     	        	 markingErrorField(res);
-    	        }
-    	    });
-    	
+    	        }*/
+    	    }).done(function() {
+                alert('회원 가입 되었습니다. 회원 이메일을 인증해주세요.');
+                location.href="/";
+    	    }).fail(function (response) {
+            	markingErrorField(response);
+            });
     }
 };
 
 
 var markingErrorField = function (response) {
-    //const errorFields = response.responseJSON.errors; //join
-    const errorFields = response.errors; //joinFileUpload
+    const errorFields = response.responseJSON.errors; //done, fail
+    //const errorFields = response.errors; //joinFileUpload - success, error
     
     if(!errorFields){
         alert(response.response.message);

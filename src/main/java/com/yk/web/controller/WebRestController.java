@@ -33,8 +33,7 @@ public class WebRestController {
 	private UserImageService userImageService;
 	
     @PostMapping("/registration")
-    public long userRegistration(@Valid UserRequestDto userDto, 
-    		@RequestParam("file_data") MultipartFile uploadfile) throws IOException {
+    public long userRegistration(@Valid UserRequestDto userDto) throws IOException {
     	long userId =  userServiceImpl.userResistrationPro(userDto);
     	UserImagesRequestDto dto = userDto.toConvertUserImagesRequestDto();
     	dto.setUsers_images(new Users(userId));
@@ -51,10 +50,10 @@ public class WebRestController {
     	
     	return userId;
     }
-    
+ /*   
     @PostMapping("/registration/2")
     public long userRegistration(@Valid @RequestBody UserRequestDto UserDto) {
     	return userServiceImpl.userResistrationPro(UserDto);
-    }
+    }*/
     
 }

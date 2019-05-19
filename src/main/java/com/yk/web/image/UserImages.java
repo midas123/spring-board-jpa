@@ -15,11 +15,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.yk.web.user.entity.Users;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserImages {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
@@ -41,9 +44,9 @@ public class UserImages {
 	@JoinColumn(name="userid")
 	private Users users_images;
 	
-	public UserImages() {
+	/*public UserImages() {
 		
-	}
+	}*/
 
 	@Builder
 	public UserImages(long image_id, String file_type, String file_origin_name, String file_save_name, Users users_images) throws IOException {
@@ -53,6 +56,4 @@ public class UserImages {
 		this.file_save_name = file_save_name;
 		this.users_images = users_images;
 	}
-	
-	
 }
